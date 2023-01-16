@@ -5,7 +5,7 @@ import fetchJson from '../lib/fetchJson'
 const AnnouncementContext = React.createContext()
 
 function AnnouncementProvider(props) {
-    const [isLoading, setIsLoading] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(false)
     const [announcement, setAnnouncement] = React.useState(
         'LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT.',
     )
@@ -32,7 +32,7 @@ function AnnouncementProvider(props) {
         [announcement, setAnnouncement, getAnnouncement, isLoading],
     )
 
-    React.useEffect(()=> {
+    React.useEffect(() => {
         getAnnouncement()
     }, [])
     return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './input.module.css';
+import styles from './input.module.css'
 
 const Input = ({
     label,
@@ -20,14 +20,21 @@ const Input = ({
             border: '1px solid var(--color-red)',
         }
         labelErrorStyle = {
-            color: 'var(--color-red)'
+            color: 'var(--color-red)',
         }
     }
 
     return (
         <div className={styles.container}>
             <div className={styles.wrapper} style={wrapperStyle}>
-                <input className={styles.input} onChange={onChange} onBlur={onBlur} id={id} style={{color: props.inputColor ? props.inputColor : null}} {...props}/>
+                <input
+                    className={styles.input}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    id={id}
+                    style={{ color: props.inputColor ? props.inputColor : null }}
+                    {...props}
+                />
                 <label
                     className={styles.label}
                     background={background}

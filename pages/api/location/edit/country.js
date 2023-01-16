@@ -6,8 +6,11 @@ async function handler(req, res) {
     try {
         const db = client.db('Next-Dash')
         const countryCollection = db.collection('Country')
-        const {name, recordId} = req.body
-        const countries = await countryCollection.updateOne({_id: ObjectId(recordId)}, {$set: {"name": name, category: 'country'}})
+        const { name, recordId } = req.body
+        const countries = await countryCollection.updateOne(
+            { _id: ObjectId(recordId) },
+            { $set: { name: name, category: 'country' } },
+        )
         if (countries.modifiedCount === 1) {
             res.status(200).json({ success: true, message: 'successfully updated' })
         }

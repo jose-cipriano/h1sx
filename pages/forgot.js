@@ -65,8 +65,10 @@ const ForgotPass = () => {
                                                 background="white"
                                                 placeholder="Please enter your user name"
                                                 autoComplete="off"
-                                                error={(touched.username && errors?.username) || err}
-                                                onChange={(...args)=> {
+                                                error={
+                                                    (touched.username && errors?.username) || err
+                                                }
+                                                onChange={(...args) => {
                                                     setErr(null)
                                                     handleChange(...args)
                                                 }}
