@@ -19,7 +19,7 @@ const Modal = ({ show, onClose, children, title }) => {
             <StyledModal>
                 <StyledModalHeader>
                     <a href="#" onClick={handleCloseClick}>
-                        x
+                        CLOSE
                     </a>
                 </StyledModalHeader>
                 {title && <StyledModalTitle>{title}</StyledModalTitle>}

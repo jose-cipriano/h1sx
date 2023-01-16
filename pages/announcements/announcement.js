@@ -123,7 +123,7 @@ export default function Announcement() {
                     handleDelete={deleteAnnouncement}
                     handleEdit={editAnnouncement}
                     title="Change Announcement"
-                    addBtn="Set"
+                    addBtn="Activate"
                     addedAction={setAnnouncement}
                 />
             )}

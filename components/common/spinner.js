@@ -1,5 +1,5 @@
-import { ClipLoader } from 'react-spinners'
+import { BarLoader } from 'react-spinners'
 
 export default function Spinner({ props }) {
-    return <ClipLoader color="green" {...props} />
+    return <BarLoader color="#cccccc" {...props} />
 }

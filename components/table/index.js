@@ -28,17 +28,18 @@ export const TableRecord = ({ records, handleDelete, handleEdit, title, addBtn, 
                             <td>{index + 1}</td>
                             <td>{record.name}</td>
                             <td>
-                                <Button
-                                    style={{ marginRight: '1rem' }}
-                                    onClick={() => handleDelete(record._id)}
-                                >
-                                    Delete
-                                </Button>
-                                <Button
+                            <Button
                                     onClick={() => setShowModal(record._id)}
                                     style={{ marginRight: '1rem' }}
                                 >
                                     Edit
+                                </Button>
+                                <Button
+                                    style={{ marginRight: '1rem' }}
+                                    onClick={() => handleDelete(record._id)}
+                                    className={loginstyles.deleteButton}
+                                >
+                                    Delete
                                 </Button>
                                 <Modal
                                     onClose={() => setShowModal(-1)}
