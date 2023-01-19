@@ -16,7 +16,7 @@ export default function Category() {
 
     const addCategory = async ({ category }) => {
         setStatus('pending')
-        await fetchJson(API_ENDPOINTS.ADD_CATEGORY, {
+        await fetchJson(API_ENDPOINTS.CATEGORY, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ category }),
@@ -30,7 +30,7 @@ export default function Category() {
 
     const getRecords = async () => {
         setLoading(true)
-        await fetchJson(API_ENDPOINTS.GET_CATEGORY, {
+        await fetchJson(API_ENDPOINTS.CATEGORY, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         }).then((res) => {
@@ -46,7 +46,7 @@ export default function Category() {
     }
 
     const deleteCategory = async (id) => {
-        await fetchJson(API_ENDPOINTS.DELETE_CATEGORY, {
+        await fetchJson(API_ENDPOINTS.CATEGORY, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id }),
@@ -58,7 +58,7 @@ export default function Category() {
     }
 
     const editCategory = async ({ name }, recordId) => {
-        await fetchJson(API_ENDPOINTS.EDIT_CATEGORY, {
+        await fetchJson(API_ENDPOINTS.CATEGORY, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, recordId }),

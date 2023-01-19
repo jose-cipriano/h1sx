@@ -1,16 +1,14 @@
 import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
+mongoose.Promise = global.Promise
 
-const areaSchema = new Schema({
+const AreaSchema = new Schema({
     name: {
         type: String,
         required: true,
     },
 })
 
-mongoose.models = {}
-
-const Area = mongoose.models('Area', areaSchema)
-
-export default Area
+module.exports =
+    mongoose.models.Area || mongoose.model('Area', AreaSchema, 'Area', { overwriteModels: true })
