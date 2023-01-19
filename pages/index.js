@@ -42,8 +42,6 @@ export default function Home() {
                         setUsernameErr(res.message)
                         setStatus('resolve')
                     } else {
-                        setUsernameErr(res.message)
-                        setPwdErr(res.message)
                         setStatus('resolve')
                         window.location.reload()
                     }
