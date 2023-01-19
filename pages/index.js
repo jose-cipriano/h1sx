@@ -42,15 +42,17 @@ export default function Home() {
                         setUsernameErr(res.message)
                         setStatus('resolve')
                     } else {
-                        setUsernameErr(null)
-                        setPwdErr(null)
+                        setUsernameErr(res.message)
+                        setPwdErr(res.message)
                         setStatus('resolve')
                         window.location.reload()
                     }
                 }),
             )
+            setStatus('resolve')
         } catch (err) {
             console.log(err)
+            setStatus('resolve')
         }
     }
     if (!user) {

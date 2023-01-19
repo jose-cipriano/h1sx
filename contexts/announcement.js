@@ -12,12 +12,14 @@ function AnnouncementProvider(props) {
 
     const getAnnouncement = React.useCallback(async () => {
         setIsLoading(true)
-        await fetchJson(API_ENDPOINTS.GET_ANNOUNCEMENT, {
+        await fetchJson(API_ENDPOINTS.ANNOUNCEMENT, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         }).then((res) => {
             if (res.success) {
-                setAnnouncement(res.data[0]?.name)
+                const resData = res.data
+                const activeAnnouncement = resData.find((item) => item.active)
+                setAnnouncement(activeAnnouncement.name)
                 setIsLoading(false)
             } else {
                 toast(res.message)

@@ -1,20 +1,13 @@
 import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
+mongoose.Promise = global.Promise
 
-const announcementSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-    },
-    active: {
-        type: Boolean,
-        default: false,
-    },
+const AnnouncementSchema = new Schema({
+    name: String,
+    active: Boolean,
 })
 
-mongoose.models = {}
-
-const Announcement = mongoose.model('Announcement', announcementSchema)
-
-export default Announcement
+module.exports =
+    mongoose.models.Announcement ||
+    mongoose.model('Announcement', AnnouncementSchema, 'Announcement', { overwriteModels: true })

@@ -46,15 +46,6 @@
     cursor: pointer;
 }
 
-.input:valid ~ label {
-    transform: translate(0, -1rem) scale(0.8);
-}
-
-.input:focus ~ label {
-    transform: translate(0, -1rem) scale(0.8);
-    color: var(--color-green);
-}
-
 .label {
     font-size: 1.2rem;
     color: var(--color-grey);
@@ -89,6 +80,7 @@
     transition: opacity 0.25s;
     padding-left: 0.3rem;
     font-weight: 500;
+    display: none;
 }
 
 .input:focus {
@@ -98,4 +90,22 @@
 .input:focus::placeholder {
     opacity: 0.7;
     color: var(--color-grey-50);
+}
+
+
+.input:valid ~ label {
+    transform: translate(0, -1rem) scale(0.8);
+}
+
+.input:focus ~ label {
+    transform: translate(0, -1rem) scale(0.8);
+    color: var(--color-green);
+}
+
+.input:disabled {
+    background-color: #c6ccd1;
+}
+
+.input:disabled label {
+    background-color: transparent;
 }

@@ -1,32 +1,47 @@
-import clientPromise from '../../lib/mongodb'
+import dbConnect from '../../lib/mongodb'
+import User from '../../models/User'
 
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { sessionOptions } from '../../lib/session'
 
 async function handler(req, res) {
+    await dbConnect()
     try {
-        const client = await clientPromise
-        const db = client.db('Next-Dash')
-        const { username, password } = await req.body
-        const oneUser = await db.collection('Users').find({ username }).toArray()
-        if (!oneUser.length) {
-            res.status(200).json({ success: false, message: 'Invalid credentials' })
-        } else {
-            if (oneUser[0].password !== password) {
-                res.status(200).json({ success: false, message: 'Invalid Password' })
+        const { username, password } = req.body
+        try {
+            const oneUser = await User.find({ username: username })
+            if (!oneUser.length) {
+                res.status(200).json({ success: false, message: 'Invalid credentials' })
+                return
+            } else {
+                if (oneUser[0].password !== password) {
+                    res.status(200).json({ success: false, message: 'Invalid Password' })
+                    return
+                }
             }
+        } catch (err) {
+            res.status(400).json({ success: false, message: `can't find User with ${username}` })
         }
 
         const user = { isLoggedIn: true }
         req.session.user = user
-        await req.session.save()
+        try {
+            await req.session.save()
+        } catch (err) {
+            res.status(403).json({ success: false, message: 'error on finding User' })
+        }
         res.json({
             success: true,
             message: 'successfully signed in',
             user,
         })
+        return
     } catch (error) {
-        res.status(500).json({ success: false, message: error.message })
+        res.status(500).json({
+            success: false,
+            message: `There was an error on the server ${error.message}`,
+        })
+        return
     }
 }
 
