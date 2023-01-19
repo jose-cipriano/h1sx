@@ -21,7 +21,7 @@ export default function Location() {
         let apiEndpoint
         switch (toggleState) {
             case 1:
-                apiEndpoint = API_ENDPOINTS.GET_COUNTRY
+                apiEndpoint = API_ENDPOINTS.COUNTRY
                 break
             case 2:
                 apiEndpoint = API_ENDPOINTS.GET_CITY
@@ -52,7 +52,7 @@ export default function Location() {
 
     const addCountry = async ({ country }) => {
         setStatus('pending')
-        await fetchJson(API_ENDPOINTS.ADD_COUNTRY, {
+        await fetchJson(API_ENDPOINTS.COUNTRY, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ country }),
@@ -107,7 +107,7 @@ export default function Location() {
         let apiEndpoint
         switch (toggleState) {
             case 1:
-                apiEndpoint = API_ENDPOINTS.DELETE_COUNTRY
+                apiEndpoint = API_ENDPOINTS.COUNTRY
                 break
             case 2:
                 apiEndpoint = API_ENDPOINTS.DELETE_CITY
@@ -137,7 +137,7 @@ export default function Location() {
         let apiEndpoint
         switch (toggleState) {
             case 1:
-                apiEndpoint = API_ENDPOINTS.EDIT_COUNTRY
+                apiEndpoint = API_ENDPOINTS.COUNTRY
                 break
             case 2:
                 apiEndpoint = API_ENDPOINTS.EDIT_CITY
