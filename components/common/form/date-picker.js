@@ -30,7 +30,7 @@ const DatePicker = ({
         labelStyle = {
             backgroundColor: 'transparent',
             opacity: 0,
-            ...labelErrorStyle
+            ...labelErrorStyle,
         }
     } else {
         labelStyle = labelErrorStyle

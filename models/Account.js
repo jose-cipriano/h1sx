@@ -6,11 +6,11 @@ mongoose.Promise = global.Promise
 const AnnouncementSchema = new Schema({
     username: {
         type: String,
-        required: true
+        required: true,
     },
     password: {
         type: String,
-        required: true
+        required: true,
     },
     role: {
         type: String,
@@ -24,7 +24,7 @@ const AnnouncementSchema = new Schema({
         type: String,
         required: true,
     },
-    
+
     consent: {
         type: String,
         required: true,
@@ -32,14 +32,14 @@ const AnnouncementSchema = new Schema({
     limit: {
         type: Number,
         default: '1',
-    },    
+    },
     active: {
         type: Boolean,
         default: true,
     },
     dateofbirth: {
         type: String,
-    }
+    },
 })
 
 module.exports =

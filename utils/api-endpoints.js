@@ -29,5 +29,5 @@ export const API_ENDPOINTS = {
     EDIT_SERVICE: 'api/service/edit/service',
     DELETE_SERVICE: 'api/service/delete/service',
     ANNOUNCEMENT: 'api/announcement',
-    ACCOUNT: 'api/accounts'
+    ACCOUNT: 'api/accounts',
 }

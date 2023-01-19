@@ -36,4 +36,5 @@ const UserSchema = new Schema({
     // },
 })
 
-module.exports = mongoose.models.User || mongoose.model('Users', UserSchema, 'Users', { overwriteModels: true })
+module.exports =
+    mongoose.models.User || mongoose.model('Users', UserSchema, 'Users', { overwriteModels: true })

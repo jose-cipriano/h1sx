@@ -54,5 +54,5 @@ export const validationSchema = {
         consent: yup.string('Enter the consent').required('Consent is required'),
         role: yup.string('Enter the role').required('Role is required'),
         limit: yup.number().integer().positive().min(0),
-    })
+    }),
 }

@@ -29,7 +29,15 @@ export default function Accounts() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                email, password, role, name, surname, limit, consent, accountStatus, birthday
+                email,
+                password,
+                role,
+                name,
+                surname,
+                limit,
+                consent,
+                accountStatus,
+                birthday,
             }),
         }).then((res) => {
             toast(res.message)
