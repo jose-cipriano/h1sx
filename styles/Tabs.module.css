@@ -69,8 +69,9 @@
     margin: 2rem 0;
 }
 
-.inputField {
-    text-align: center;
+.input_field {
+    display: flex;
+    align-items: center;
 }
 
 .crFormCta {
@@ -118,4 +119,8 @@
 
 .form div:last-child {
     margin-bottom: 30px;
+}
+
+.account_form {
+    width: 100%;
 }

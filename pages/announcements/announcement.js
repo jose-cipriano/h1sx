@@ -17,7 +17,7 @@ export default function Announcement() {
     const { setAnnouncement } = useAnnouncement()
     const addAnnouncement = async ({ announcement }) => {
         setStatus('pending')
-        await fetchJson(API_ENDPOINTS.ADD_ANNOUNCEMENT, {
+        await fetchJson(API_ENDPOINTS.ANNOUNCEMENT, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ announcement }),
@@ -31,7 +31,7 @@ export default function Announcement() {
 
     const getRecords = async () => {
         setLoading(true)
-        await fetchJson(API_ENDPOINTS.GET_ANNOUNCEMENT, {
+        await fetchJson(API_ENDPOINTS.ANNOUNCEMENT, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         }).then((res) => {
@@ -47,7 +47,7 @@ export default function Announcement() {
     }
 
     const deleteAnnouncement = async (id) => {
-        await fetchJson(API_ENDPOINTS.DELETE_ANNOUNCEMENT, {
+        await fetchJson(API_ENDPOINTS.ANNOUNCEMENT, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id }),
@@ -59,7 +59,7 @@ export default function Announcement() {
     }
 
     const editAnnouncement = async ({ name }, recordId) => {
-        await fetchJson(API_ENDPOINTS.EDIT_ANNOUNCEMENT, {
+        await fetchJson(API_ENDPOINTS.ANNOUNCEMENT, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, recordId }),
