@@ -1,16 +1,15 @@
 import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
+mongoose.Promise = global.Promise
 
-const serviceSchema = new Schema({
+const ServiceSchema = new Schema({
     name: {
         type: String,
         required: true,
     },
 })
 
-mongoose.models = {}
-
-const Service = mongoose.models('Service', serviceSchema)
-
-export default Service
+module.exports =
+    mongoose.models.Service ||
+    mongoose.model('Service', ServiceSchema, 'Service', { overwriteModels: true })

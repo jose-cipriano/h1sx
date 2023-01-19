@@ -24,13 +24,13 @@ export default function Location() {
                 apiEndpoint = API_ENDPOINTS.COUNTRY
                 break
             case 2:
-                apiEndpoint = API_ENDPOINTS.GET_CITY
+                apiEndpoint = API_ENDPOINTS.CITY
                 break
             case 3:
-                apiEndpoint = API_ENDPOINTS.GET_AREA
+                apiEndpoint = API_ENDPOINTS.AREA
                 break
             case 4:
-                apiEndpoint = API_ENDPOINTS.GET_STREET
+                apiEndpoint = API_ENDPOINTS.STREET
                 break
             default:
                 break
@@ -65,7 +65,7 @@ export default function Location() {
     }
     const addCity = async ({ city }) => {
         setStatus('pending')
-        await fetchJson(API_ENDPOINTS.ADD_CITY, {
+        await fetchJson(API_ENDPOINTS.CITY, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ city }),
@@ -78,7 +78,7 @@ export default function Location() {
     }
     const addArea = async ({ area }) => {
         setStatus('pending')
-        await fetchJson(API_ENDPOINTS.ADD_AREA, {
+        await fetchJson(API_ENDPOINTS.AREA, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ area }),
@@ -91,7 +91,7 @@ export default function Location() {
     }
     const addStreet = async ({ street }) => {
         setStatus('pending')
-        await fetchJson(API_ENDPOINTS.ADD_STREET, {
+        await fetchJson(API_ENDPOINTS.STREET, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ street }),
@@ -110,13 +110,13 @@ export default function Location() {
                 apiEndpoint = API_ENDPOINTS.COUNTRY
                 break
             case 2:
-                apiEndpoint = API_ENDPOINTS.DELETE_CITY
+                apiEndpoint = API_ENDPOINTS.CITY
                 break
             case 3:
-                apiEndpoint = API_ENDPOINTS.DELETE_AREA
+                apiEndpoint = API_ENDPOINTS.AREA
                 break
             case 4:
-                apiEndpoint = API_ENDPOINTS.DELETE_STREET
+                apiEndpoint = API_ENDPOINTS.STREET
                 break
             default:
                 break
@@ -140,13 +140,13 @@ export default function Location() {
                 apiEndpoint = API_ENDPOINTS.COUNTRY
                 break
             case 2:
-                apiEndpoint = API_ENDPOINTS.EDIT_CITY
+                apiEndpoint = API_ENDPOINTS.CITY
                 break
             case 3:
-                apiEndpoint = API_ENDPOINTS.EDIT_AREA
+                apiEndpoint = API_ENDPOINTS.AREA
                 break
             case 4:
-                apiEndpoint = API_ENDPOINTS.EDIT_STREET
+                apiEndpoint = API_ENDPOINTS.STREET
                 break
             default:
                 break

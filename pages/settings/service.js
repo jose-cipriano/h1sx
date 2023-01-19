@@ -16,7 +16,7 @@ export default function Service() {
 
     const addService = async ({ service }) => {
         setStatus('pending')
-        await fetchJson(API_ENDPOINTS.ADD_SERVICE, {
+        await fetchJson(API_ENDPOINTS.SERVICE, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ service }),
@@ -30,7 +30,7 @@ export default function Service() {
 
     const getRecords = async () => {
         setLoading(true)
-        await fetchJson(API_ENDPOINTS.GET_SERVICE, {
+        await fetchJson(API_ENDPOINTS.SERVICE, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         }).then((res) => {
@@ -46,7 +46,7 @@ export default function Service() {
     }
 
     const deleteService = async (id) => {
-        await fetchJson(API_ENDPOINTS.DELETE_SERVICE, {
+        await fetchJson(API_ENDPOINTS.SERVICE, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id }),
@@ -58,7 +58,7 @@ export default function Service() {
     }
 
     const editService = async ({ name }, recordId) => {
-        await fetchJson(API_ENDPOINTS.EDIT_SERVICE, {
+        await fetchJson(API_ENDPOINTS.SERVICE, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, recordId }),
