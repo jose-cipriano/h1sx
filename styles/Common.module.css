@@ -54,6 +54,7 @@
     display: grid;
     grid-template-columns: 1fr;
     align-items: start;
+    justify-items: center;
     gap: 0rem;
   }
 
