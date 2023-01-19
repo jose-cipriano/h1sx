@@ -1,6 +1,7 @@
 import { ObjectId } from 'mongodb'
 import dbConnect from '../../../lib/mongodb'
 import Account from '../../../models/Account'
+import bcrypt from 'bcryptjs'
 
 async function handler(req, res) {
     await dbConnect()
@@ -38,7 +39,7 @@ async function handler(req, res) {
                         try {
                             await Account.insertMany({
                                 username: email,
-                                password: password,
+                                password: bcrypt.hashSync(password, 8),
                                 role: role,
                                 name: name,
                                 surname: surname,
