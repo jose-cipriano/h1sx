@@ -1,0 +1,15 @@
+.tabsBlock {
+    display: flex;
+    margin-top: 25px;
+}
+
+.actionBtn {
+    position: absolute;
+    right: 25px;
+    top: 40px;
+    display: flex;
+}
+
+.createListing {
+    margin-right: 10px;
+}

@@ -1,0 +1,116 @@
+.container {
+    position: relative;
+    margin: 0.5rem auto;
+}
+
+.wrapper {
+    width: 30rem;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--color-grey);
+    border-radius: 0.5rem;
+    transition: all 0.25s ease-in-out;
+    position: relative;
+}
+
+.wrapper:hover {
+    border-color: var(--color-grey-50);
+}
+
+.wrapper:hover label {
+    color: var(--color-grey-dark);
+}
+
+.wrapper:focus-within {
+    border-color: var(--color-green);
+}
+
+.error {
+    margin: 0;
+    padding: 0.1rem 0 0 0.8rem;
+    font-size: 1rem !important;
+    font-weight: normal;
+    color: var(--color-red);
+    min-height: 14px;
+    height: 20px;
+}
+
+.styledError {
+    position: absolute;
+    right: 0.8rem;
+    top: 1rem;
+    height: 1.6rem;
+    width: 1.6rem;
+    cursor: pointer;
+}
+
+.label {
+    font-size: 1.2rem;
+    color: black;
+    padding: 0.5rem 1rem;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.25s ease-in-out;
+    background-color: white;
+    z-index: 40;
+    text-align: center;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+.input {
+    background: none;
+    color: transparent;
+    height: 280px;
+    font-size: 1.2rem;
+    padding: 0.5rem 1.2rem;
+    width: 100%;
+    margin: 0;
+    line-height: 2;
+    display: block;
+    border: none;
+    border-radius: 0;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    text-align: right;
+    -moz-opacity: 0;
+    filter: alpha(opacity: 0);
+    opacity: 0;
+    z-index: 20;
+}
+
+.input::placeholder {
+    opacity: 0;
+    transition: opacity 0.25s;
+    padding-left: 0.3rem;
+    font-weight: 500;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.input:focus::placeholder {
+    opacity: 0.7;
+    color: var(--color-grey-50);
+}
+
+.fakeFile {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    width: 100%;
+}
+
+.fakeInput {
+    width: 100%;
+    height: 280px;
+    border: none;
+}
