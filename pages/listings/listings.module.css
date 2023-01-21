@@ -13,3 +13,9 @@
 .createListing {
     margin-right: 10px;
 }
+
+.flexForm {
+    display: flex;
+    justify-content: space-between;
+    padding: 3rem 2rem;
+}

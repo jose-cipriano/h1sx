@@ -1,17 +1,18 @@
-import { useState } from 'react'
 import styles from './phone-number-input.module.css'
-import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
 
 const PhoneNumberInput = ({
     label,
     border,
     id,
     error,
+    name,
     background,
     handleError,
     onChange,
     onBlur,
+    setFieldValue,
     ...props
 }) => {
     let wrapperStyle = { border: border }
@@ -25,16 +26,25 @@ const PhoneNumberInput = ({
             color: 'var(--color-red)',
         }
     }
-    const [value, setValue] = useState()
+
+    const onValueChange = (code) => {
+        if (!code) return
+        setFieldValue(name, code)
+
+        if (onChange !== null) {
+            onChange(code)
+        }
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.wrapper} style={wrapperStyle}>
                 <PhoneInput
                     className={styles.input}
-                    onChange={setValue}
                     onBlur={onBlur}
                     id={id}
-                    value={value}
+                    defaultCountry="US"
+                    onChange={onValueChange}
                     {...props}
                 />
                 <label

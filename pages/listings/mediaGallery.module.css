@@ -1,0 +1,54 @@
+.info_1 {
+    display: flex;
+    justify-content: space-between;
+    width: 48%;
+}
+
+.info_1_1 {
+    width: 48%;
+}
+
+.info_1_2 {
+    width: 48%;
+}
+
+.info_2 {
+    display: flex;
+    justify-content: space-between;
+    width: 48%;
+}
+
+.thumbnailsContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.5rem 1rem;
+}
+
+.uploadImage {
+    height: 120px;
+    border: 0.1rem solid var(--color-grey-light-2);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+.uploadImageBtn {
+    width: 100%;
+    background: transparent;
+    border: none;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    background: var(--color-grey-light-2);
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.uploadImage:hover .uploadImageBtn  {
+    transform: translate(-50%, -50%) scale(1.2);
+}
