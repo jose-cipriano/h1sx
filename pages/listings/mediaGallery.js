@@ -1,25 +1,40 @@
 import mediaGalleryStyle from './mediaGallery.module.css'
 import { ImageView } from '../../components/common/image-view'
+import { useState } from 'react'
 
-export const MediaGalleryForm = () => {
-    const Images = [
-        'https://loremflickr.com/320/240?random=1',
-        'https://loremflickr.com/320/240?random=2',
-        'https://loremflickr.com/320/240?random=3',
-        'https://loremflickr.com/320/240?random=4',
-    ]
+const MediaGalleryForm = () => {
+    const Images = []
+    const [imgGallery, setImgGallery] = useState('')
+
+    const handleSetImgGallery = (id) => {
+        setImgGallery(Images[id])
+    }
 
     return (
         <>
             <div className={mediaGalleryStyle.info_1}>
                 <div className={mediaGalleryStyle.info_1_1}>
-                    <ImageView id="picture_gallery" src={Images[0]} isLarge={true} />
+                    <ImageView
+                        id="picture_gallery"
+                        src={imgGallery}
+                        isLarge={true}
+                        label="Picture Gallery"
+                    />
                 </div>
                 <div className={mediaGalleryStyle.info_1_2}>
                     <div className={mediaGalleryStyle.thumbnailsContainer}>
-                        {Images?.length &&
+                        {Images &&
                             Images.map((img, idx) => {
-                                return <ImageView id={`thumbnails_${idx}`} key={idx} src={img} />
+                                return (
+                                    <ImageView
+                                        id={`thumbnails_${idx}`}
+                                        key={idx}
+                                        src={img}
+                                        onClick={() => {
+                                            handleSetImgGallery(idx)
+                                        }}
+                                    />
+                                )
                             })}
                         <div className={mediaGalleryStyle.uploadImage}>
                             <button className={mediaGalleryStyle.uploadImageBtn}>+</button>
@@ -33,7 +48,7 @@ export const MediaGalleryForm = () => {
                 </div>
                 <div className={mediaGalleryStyle.info_1_2}>
                     <div className={mediaGalleryStyle.thumbnailsContainer}>
-                        {Images.length &&
+                        {Images &&
                             Images.map((img, idx) => {
                                 return <ImageView id={`thumbnails_${idx}`} key={idx} src={img} />
                             })}
@@ -46,3 +61,5 @@ export const MediaGalleryForm = () => {
         </>
     )
 }
+
+export default MediaGalleryForm

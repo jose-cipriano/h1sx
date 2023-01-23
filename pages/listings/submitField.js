@@ -2,7 +2,7 @@ import { useFormikContext } from 'formik'
 import listingStyles from './listings.module.css'
 import { Button } from '../../components/common/button'
 
-export const SubmitField = ({ disabled }) => {
+const SubmitField = ({ disabled }) => {
     const { values } = useFormikContext()
     const handleCreateList = () => {
         // TODO => api request to save listingValue on database
@@ -28,3 +28,5 @@ export const SubmitField = ({ disabled }) => {
         </div>
     )
 }
+
+export default SubmitField
