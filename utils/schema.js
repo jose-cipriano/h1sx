@@ -1,7 +1,6 @@
 import * as yup from 'yup'
 
-const phoneRegExp =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+const phoneRegExp = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
 
 export const validationSchema = {
     loginSchema: yup.object({
@@ -53,7 +52,6 @@ export const validationSchema = {
         password: yup.string('Enter the password').required('Password is required'),
         name: yup.string('Enter the name').required('Name is required'),
         surname: yup.string('Enter the surname').required('Surname is required'),
-        // birthday: yup.date('Enter the birthday').required('Birthday is required'),
         consent: yup.string('Enter the consent').required('Consent is required'),
         role: yup.string('Enter the role').required('Role is required'),
         limit: yup.number().integer().positive().min(0),
@@ -75,3 +73,42 @@ export const validationSchema = {
         mapWithLocation: yup.string('Enter your location pin').required('This field is required'),
     }),
 }
+
+export const listingSchema = [
+    yup.object({
+        listingName: yup.string('Enter the Listing Name').required('Listing Name is required'),
+        age: yup.number().integer().positive().min(18),
+        gender: yup.boolean(),
+        code: yup
+            .string()
+            .matches(phoneRegExp, 'Enter Valid phone number')
+            .required('Phone number is required'),
+        contactMethods: yup.string('Enter Contact Methods').required('Contact Method is required'),
+        aboutMe: yup.string('Enter your detail').required('Your Information is required'),
+        locationCountry: yup
+            .string('Enter your Country')
+            .required('Your Country location is required'),
+        locationCity: yup.string('Enter your City').required('Your City location is required'),
+        mapWithLocation: yup.string('Enter your location pin').required('This field is required'),
+    }),
+    yup.object({
+        nationality: yup.string('Enter the Nationality').required('Nationality is required'),
+        i_speak: yup.string('Enter the language').required('This field is required'),
+        orientation: yup.string('Enter the Orientation').required('This field is required'),
+        i_meet: yup.string('Enter this field').required('This field is required'),
+        available_for: yup.string('Enter this field').required('This field is required'),
+        height: yup.string('Enter this field').required('This field is required'),
+        weight: yup.string('Enter this field').required('This field is required'),
+        cup_size: yup.string('Enter this field').required('This field is required'),
+        breast_type: yup.string('Enter this field').required('This field is required'),
+        penis_length: yup.string('Enter this field').required('This field is required'),
+        penis_girth: yup.string('Enter this field').required('This field is required'),
+        hair_color: yup.string('Enter this field').required('This field is required'),
+        eye_color: yup.string('Enter this field').required('This field is required'),
+        intimate_hair: yup.string('Enter this field').required('This field is required'),
+        bodyart: yup.string('Enter this field').required('This field is required'),
+        smoking: yup.string('Enter this field').required('This field is required'),
+        drinking: yup.string('Enter this field').required('This field is required'),
+        party_play: yup.string('Enter this field').required('This field is required'),
+    }),
+]

@@ -1,33 +1,78 @@
-import { useEffect, useState } from 'react'
+// libs
+import { useState } from 'react'
+import { Form, Formik } from 'formik'
 import Layout from '../../components/layout/Layout'
 import { AnnouncementProvider } from '../../contexts/announcement'
-import BasicDetails from './basic-details'
-import Characteristics from './characteristics'
-
-import { Button } from '../../components/common/button'
+// multipart forms
+import { BasicDetailsForm } from './basicDetails'
+import { CharacteristicsForm } from './characteristics'
+import { MediaGalleryForm } from './mediaGallery'
+import { SubmitField } from './submitField'
+// styles
 import styles from '../../styles/Layout.module.css'
 import Tabstyles from '../../styles/Tabs.module.css'
 import listingStyles from './listings.module.css'
-export default function Listings() {
-    const [toggleState, setToggleState] = useState(1)
-    const toggleTab = (id) => {
-        setToggleState(id)
-    }
-    const [canPublish, setCanPublish] = useState(false)
+// utils
+import { listingSchema } from '../../utils/schema'
 
-    const handleBasicDetailsSubmit = () => {
-        console.log('handleBasicDetailsSubmit')
-    }
+const steps = [
+    'basic details',
+    'characteristics',
+    'media gallery',
+    'services',
+    'availability & rates',
+]
+export default function Listings() {
+    const [activeStep, setActiveStep] = useState(0)
+    const isLastStep = activeStep === steps.length - 1
 
     const handleNextForm = () => {
-        setToggleState((prev) => {
-            if (prev !== 5) {
-                return prev + 1
-            } else {
-                setCanPublish(true)
-                return prev
-            }
-        })
+        if (!isLastStep) {
+            setActiveStep((prev) => prev + 1)
+        }
+    }
+
+    function _renderStepContent(step, touched, errors, handleBlur, handleChange, setFieldValue) {
+        switch (step) {
+            case 0:
+                return (
+                    <BasicDetailsForm
+                        errors={errors}
+                        handleBlur={handleBlur}
+                        handleChange={handleChange}
+                        setFieldValue={setFieldValue}
+                    />
+                )
+            case 1:
+                return (
+                    <CharacteristicsForm
+                        touched={touched}
+                        errors={errors}
+                        handleBlur={handleBlur}
+                        handleChange={handleChange}
+                    />
+                )
+            case 2:
+                return (
+                    <MediaGalleryForm
+                        touched={touched}
+                        errors={errors}
+                        handleBlur={handleBlur}
+                        handleChange={handleChange}
+                    />
+                )
+            default:
+                return null
+        }
+    }
+
+    function _renderClassName(step) {
+        switch (step) {
+            case 0:
+                return listingStyles.flexForm
+            default:
+                return listingStyles.flexForm
+        }
     }
 
     return (
@@ -36,82 +81,53 @@ export default function Listings() {
                 <fieldset className={styles.fieldsetBox}>
                     <legend>Listings</legend>
                     <div className={listingStyles.tabsBlock}>
-                        <button
-                            className={
-                                toggleState === 1
-                                    ? `${Tabstyles.Tabs} ${Tabstyles.ActiveTabs}`
-                                    : Tabstyles.Tabs
-                            }
-                            onClick={() => {
-                                toggleTab(1)
-                            }}
-                        >
-                            1 basic details
-                        </button>
-                        <button
-                            className={
-                                toggleState === 2
-                                    ? `${Tabstyles.Tabs} ${Tabstyles.ActiveTabs}`
-                                    : Tabstyles.Tabs
-                            }
-                            onClick={() => {
-                                toggleTab(2)
-                            }}
-                        >
-                            2 characteristics
-                        </button>
-                        <button
-                            className={
-                                toggleState === 3
-                                    ? `${Tabstyles.Tabs} ${Tabstyles.ActiveTabs}`
-                                    : Tabstyles.Tabs
-                            }
-                            onClick={() => {
-                                toggleTab(3)
-                            }}
-                        >
-                            3 media gallery
-                        </button>
-                        <button
-                            className={
-                                toggleState === 4
-                                    ? `${Tabstyles.Tabs} ${Tabstyles.ActiveTabs}`
-                                    : Tabstyles.Tabs
-                            }
-                            onClick={() => {
-                                toggleTab(4)
-                            }}
-                        >
-                            4 services
-                        </button>
-                        <button
-                            className={
-                                toggleState === 5
-                                    ? `${Tabstyles.Tabs} ${Tabstyles.ActiveTabs}`
-                                    : Tabstyles.Tabs
-                            }
-                            onClick={() => {
-                                toggleTab(5)
-                            }}
-                        >
-                            5 availability & rates
-                        </button>
-                        <div className={listingStyles.actionBtn}>
-                            <Button
-                                style={{
-                                    marginRight: '10px',
-                                    backgroundColor: 'transparent',
-                                    color: 'black',
-                                    border: '1px solid black',
-                                }}
-                            >
-                                create/publish
-                            </Button>
-                            <Button onClick={handleNextForm}>Next</Button>
-                        </div>
+                        {steps.map((step, idx) => {
+                            return (
+                                <button
+                                    key={idx}
+                                    className={
+                                        activeStep === idx
+                                            ? `${Tabstyles.Tabs} ${Tabstyles.ActiveTabs}`
+                                            : Tabstyles.Tabs
+                                    }
+                                >
+                                    {idx + 1} {step}
+                                </button>
+                            )
+                        })}
                     </div>
-                    {toggleState === 1 && <BasicDetails onSubmit={handleBasicDetailsSubmit} />}
-                    {toggleState === 2 && <Characteristics />}
+                    <Formik
+                        initialValues={{ age: 18 }}
+                        validationSchema={listingSchema[activeStep]}
+                        onSubmit={handleNextForm}
+                    >
+                        {({
+                            touched,
+                            errors,
+                            handleBlur,
+                            handleChange,
+                            setFieldValue,
+                            isSubmitting,
+                            isValidating,
+                        }) => {
+                            return (
+                                <Form className={_renderClassName(activeStep)}>
+                                    {_renderStepContent(
+                                        activeStep,
+                                        touched,
+                                        errors,
+                                        handleBlur,
+                                        handleChange,
+                                        setFieldValue,
+                                        isSubmitting,
+                                        isValidating,
+                                        isValidating,
+                                    )}
+                                    <SubmitField disabled={!isLastStep} />
+                                </Form>
+                            )
+                        }}
+                    </Formik>
                 </fieldset>
             </div>
         </div>

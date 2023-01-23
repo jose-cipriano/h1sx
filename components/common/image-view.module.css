@@ -1,0 +1,18 @@
+.imageViewStyle {
+    border: 0.1rem solid var(--color-grey-light-2);
+    border-radius: var(--border-radius);
+    object-fit: cover;
+}
+
+.noImage {
+    position: relative;
+    top: 48%;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--color-grey);
+}
+
+.img {
+    border-radius: var(--border-radius);
+}
