@@ -5,7 +5,7 @@ import PhoneNumberInput from '../../components/common/form/phone-number-input'
 import Select from '../../components/common/form/select'
 import basicDetailsStyles from './basicDetails.module.css'
 
-export const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue }) => {
+const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue }) => {
     return (
         <>
             <div className={basicDetailsStyles.info_1}>
@@ -144,3 +144,5 @@ export const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldVal
         </>
     )
 }
+
+export default BasicDetailsForm

@@ -1,7 +1,7 @@
 import Input from '../../components/common/form/input'
 import characteristicsStyles from './characteristics.module.css'
 
-export const CharacteristicsForm = ({ touched, errors, handleChange, handleBlur }) => {
+const CharacteristicsForm = ({ touched, errors, handleChange, handleBlur }) => {
     return (
         <>
             <div className={characteristicsStyles.info_1}>
@@ -231,3 +231,5 @@ export const CharacteristicsForm = ({ touched, errors, handleChange, handleBlur 
         </>
     )
 }
+
+export default CharacteristicsForm
