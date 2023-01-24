@@ -16,8 +16,7 @@ const ImageInput = ({
     setFieldValue,
     ...props
 }) => {
-    const [imgSrc, setImgSrc] = useState('')
-
+    const [imgSrc, setImgSrc] = useState(null)
     const ref = useRef()
     let wrapperStyle = { border: border },
         labelErrorStyle
@@ -33,7 +32,7 @@ const ImageInput = ({
 
     return (
         <div className={styles.container}>
-            <div className={styles.wrapper} style={wrapperStyle}>
+            <div className={styles.wrapper} style={wrapperStyle} width="300px">
                 <input
                     ref={ref}
                     className={styles.input}
@@ -42,11 +41,13 @@ const ImageInput = ({
                     name={name}
                     type="file"
                     onChange={(e) => {
-                        let file = ref.file.files[0]
+                        console.log('e.target.files.FileList===>', e.target.files[0])
+                        let file = e.target.files[0]
+                        // let file = ref.file.files[0]
                         let reader = new FileReader()
                         let url = reader.readAsDataURL(file)
 
-                        reader.onloaded = function (e) {
+                        reader.onloadend = function (e) {
                             setImgSrc([reader.result])
                         }
                         console.log(url)
@@ -67,8 +68,16 @@ const ImageInput = ({
                 >
                     {label}
                 </label>
+                {imgSrc?.length && (
+                    <Image
+                        className={styles.preview}
+                        src={imgSrc[0]}
+                        alt="uploaded_image"
+                        width={285}
+                        height={280}
+                    />
+                )}
             </div>
-            <Image src={imgSrc} alt="uploaded_image" width="100%" height="100%" />
             <p className={styles.error} lh="1.4" align="left" color="red-1">
                 {error}
             </p>
