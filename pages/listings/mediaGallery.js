@@ -1,6 +1,6 @@
 import mediaGalleryStyle from './mediaGallery.module.css'
 import { ImageView } from '../../components/common/image-view'
-import ImageInput from '../../components/common/form/image-input'
+import ThumbnailInput from '../../components/common/form/thumbnail-input'
 import { useState } from 'react'
 
 const MediaGalleryForm = ({ errors, handleChange, handleBlur, setFieldValue }) => {
@@ -26,6 +26,13 @@ const MediaGalleryForm = ({ errors, handleChange, handleBlur, setFieldValue }) =
                     <div className={mediaGalleryStyle.thumbnailsContainer}>
                         {Images &&
                             Images.map((img, idx) => {
+                                return <ImageView id={`thumbnails_${idx}`} key={idx} src={img} />
+                            })}
+                        <div className={mediaGalleryStyle.uploadImage}>
+                            <button className={mediaGalleryStyle.uploadImageBtn}>+</button>
+                        </div>
+                        {/* {Images &&
+                            Images.map((img, idx) => {
                                 return (
                                     <ImageView
                                         id={`thumbnails_${idx}`}
@@ -36,9 +43,9 @@ const MediaGalleryForm = ({ errors, handleChange, handleBlur, setFieldValue }) =
                                         }}
                                     />
                                 )
-                            })}
-                        <div className={mediaGalleryStyle.uploadImage}>
-                            <ImageInput
+                            })} 
+                            <div className={mediaGalleryStyle.uploadImage}>
+                            <ThumbnailInput
                                 id="uploadForMediaGallery"
                                 label="uploadForMediaGallery"
                                 name="uploadForMediaGallery"
@@ -50,7 +57,7 @@ const MediaGalleryForm = ({ errors, handleChange, handleBlur, setFieldValue }) =
                                 setFieldValue={setFieldValue}
                                 className={mediaGalleryStyle.uploadImageBtn}
                             />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
