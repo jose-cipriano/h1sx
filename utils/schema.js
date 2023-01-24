@@ -1,6 +1,8 @@
 import * as yup from 'yup'
 
 const phoneRegExp = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
+const FILE_SIZE = 500
+const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png']
 
 export const validationSchema = {
     loginSchema: yup.object({
@@ -59,7 +61,7 @@ export const validationSchema = {
     basicDetailSchema: yup.object({
         listingName: yup.string('Enter the Listing Name').required('Listing Name is required'),
         age: yup.number().integer().positive().min(18),
-        gender: yup.boolean(),
+        gender: yup.string(),
         code: yup
             .string()
             .matches(phoneRegExp, 'Enter Valid phone number')
@@ -78,18 +80,33 @@ export const listingSchema = [
     yup.object({
         listingName: yup.string('Enter the Listing Name').required('Listing Name is required'),
         age: yup.number().integer().positive().min(18),
-        gender: yup.boolean(),
+        gender: yup.string(),
         code: yup
             .string()
             .matches(phoneRegExp, 'Enter Valid phone number')
             .required('Phone number is required'),
-        contactMethods: yup.string('Enter Contact Methods').required('Contact Method is required'),
         aboutMe: yup.string('Enter your detail').required('Your Information is required'),
         locationCountry: yup
             .string('Enter your Country')
             .required('Your Country location is required'),
         locationCity: yup.string('Enter your City').required('Your City location is required'),
         mapWithLocation: yup.string('Enter your location pin').required('This field is required'),
+        contactMethods: yup
+            .array()
+            .of(yup.string().required('Required field'))
+            .required('Required'),
+        listingPicture: yup
+            .object()
+            .shape({
+                file: yup
+                    .mixed()
+                    .test('fileSize', 'File Size is too large', (value) => value.size <= FILE_SIZE)
+                    .test('fileType', 'Unsupported File Format', (value) =>
+                        SUPPORTED_FORMATS.includes(value.type),
+                    )
+                    .required('A file is required.'),
+            })
+            .nullable(),
     }),
     yup.object({
         nationality: yup.string('Enter the Nationality').required('Nationality is required'),
@@ -110,5 +127,19 @@ export const listingSchema = [
         smoking: yup.string('Enter this field').required('This field is required'),
         drinking: yup.string('Enter this field').required('This field is required'),
         party_play: yup.string('Enter this field').required('This field is required'),
+    }),
+    yup.object({
+        uploadForMediaGallery: yup
+            .object()
+            .shape({
+                file: yup
+                    .mixed()
+                    .test('fileSize', 'File Size is too large', (value) => value.size <= FILE_SIZE)
+                    .test('fileType', 'Unsupported File Format', (value) =>
+                        SUPPORTED_FORMATS.includes(value.type),
+                    )
+                    .required('A file is required.'),
+            })
+            .nullable(),
     }),
 ]

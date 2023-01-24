@@ -1,11 +1,26 @@
 import Input from '../../components/common/form/input'
-import FileInput from '../../components/common/form/file-input'
+import ImageInput from '../../components/common/form/image-input'
 import TextArea from '../../components/common/form/text-area'
 import PhoneNumberInput from '../../components/common/form/phone-number-input'
 import Select from '../../components/common/form/select'
 import basicDetailsStyles from './basicDetails.module.css'
+import GroupSelect from '../../components/common/form/group-select'
 
-const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue }) => {
+const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, values }) => {
+    const contactMethods = [
+        { label: 'Call', value: 'Call' },
+        { label: 'SMS', value: 'SMS' },
+        { label: 'WhatsApp', value: 'WhatsApp' },
+        { label: 'Viber', value: 'Viber' },
+        { label: 'Telegram', value: 'Telegram' },
+    ]
+
+    const genders = [
+        { label: 'Man', value: 'Man' },
+        { label: 'Woman', value: 'Woman' },
+    ]
+
+    console.log(values, errors)
     return (
         <>
             <div className={basicDetailsStyles.info_1}>
@@ -42,10 +57,8 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue }) =
                         error={errors.gender}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                    >
-                        <option value="man">Man</option>
-                        <option value="woman">Woman</option>
-                    </Select>
+                        options={genders}
+                    ></Select>
                     <PhoneNumberInput
                         id="code"
                         setFieldValue={setFieldValue}
@@ -57,21 +70,19 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue }) =
                         onChange={handleChange}
                         onBlur={handleBlur}
                     />
-                    <Input
+                    <GroupSelect
                         id="contactMethods"
-                        label="Contact Methods"
                         name="contactMethods"
-                        type="string"
-                        background="white"
-                        placeholder="Contact Methods"
-                        autoComplete="off"
+                        label="Contact Methods"
+                        options={contactMethods}
                         error={errors?.contactMethods}
                         onChange={handleChange}
-                        onBlur={handleBlur}
+                        upTo={5}
+                        values={values}
                     />
                 </div>
                 <div className={basicDetailsStyles.info_1__2}>
-                    <FileInput
+                    <ImageInput
                         id="listingPicture"
                         label="Listing Picture (2:3 Ratio)"
                         name="listingPicture"
@@ -80,6 +91,7 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue }) =
                         error={errors?.listingPicture}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        setFieldValue={setFieldValue}
                     />
                 </div>
             </div>
@@ -116,7 +128,7 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue }) =
                     <div>
                         <Input
                             id="locationCountry"
-                            label="Listing Name"
+                            label="Location Country"
                             name="locationCountry"
                             type="text"
                             background="white"
@@ -128,7 +140,7 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue }) =
                         />
                         <Input
                             id="locationCity"
-                            label="Listing Name"
+                            label="Location City"
                             name="locationCity"
                             type="text"
                             background="white"

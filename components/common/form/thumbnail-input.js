@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { useRef } from 'react'
-import styles from './image-input.module.css'
+import styles from './thumbnail-input.module.css'
 
-const ImageInput = ({
+const ThumbnailInput = ({
     label,
     border,
     id,
@@ -30,10 +30,12 @@ const ImageInput = ({
         }
     }
 
+    console.log(imgSrc)
+
     return (
         <div className={styles.container}>
-            <div className={styles.wrapper} style={wrapperStyle} width="300px">
-                <input
+            <div className={styles.wrapper} style={wrapperStyle}>
+                {/* <input
                     ref={ref}
                     className={styles.input}
                     onBlur={onBlur}
@@ -53,7 +55,7 @@ const ImageInput = ({
                     }}
                     style={{ color: props.inputColor ? props.inputColor : null }}
                     {...props}
-                />
+                /> */}
                 <div className={styles.fakeFile}>
                     <input className={styles.fakeInput} />
                 </div>
@@ -64,9 +66,9 @@ const ImageInput = ({
                     htmlFor={id}
                     style={labelErrorStyle}
                 >
-                    {label}
+                    +
                 </label>
-                {imgSrc?.length && (
+                {/* {imgSrc?.length && (
                     <Image
                         className={styles.preview}
                         src={imgSrc[0]}
@@ -74,7 +76,7 @@ const ImageInput = ({
                         width={285}
                         height={280}
                     />
-                )}
+                )} */}
             </div>
             <p className={styles.error} lh="1.4" align="left" color="red-1">
                 {error}
@@ -84,4 +86,4 @@ const ImageInput = ({
     )
 }
 
-export default ImageInput
+export default ThumbnailInput

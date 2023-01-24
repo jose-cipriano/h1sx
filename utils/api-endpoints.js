@@ -12,4 +12,5 @@ export const API_ENDPOINTS = {
     SERVICE: '/api/service',
     ANNOUNCEMENT: 'api/announcement',
     ACCOUNT: 'api/accounts',
+    LISTING: 'api/listing',
 }

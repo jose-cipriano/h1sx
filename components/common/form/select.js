@@ -1,4 +1,5 @@
 import React from 'react'
+import { Field } from 'formik'
 import styles from './select.module.css'
 
 const Select = ({
@@ -11,10 +12,11 @@ const Select = ({
     onChange,
     onBlur,
     options,
+    name,
     ...props
 }) => {
-    let wrapperStyle = { border: border }
-    let labelErrorStyle
+    let wrapperStyle = { border: border },
+        labelErrorStyle
 
     if (!!error) {
         wrapperStyle = {
@@ -32,10 +34,17 @@ const Select = ({
                     className={styles.select}
                     onChange={onChange}
                     onBlur={onBlur}
+                    name={name}
                     id={id}
                     {...props}
                 >
-                    {props.children}
+                    {options.map((opt) => {
+                        return (
+                            <option key={opt.value} value={opt.value}>
+                                {opt.label}
+                            </option>
+                        )
+                    })}
                 </select>
                 <label
                     className={styles.label}
