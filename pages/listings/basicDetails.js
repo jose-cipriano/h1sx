@@ -14,6 +14,13 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
         { label: 'Viber', value: 'Viber' },
         { label: 'Telegram', value: 'Telegram' },
     ]
+
+    const genders = [
+        { label: 'Man', value: 'Man' },
+        { label: 'Woman', value: 'Woman' },
+    ]
+
+    console.log(values, errors)
     return (
         <>
             <div className={basicDetailsStyles.info_1}>
@@ -50,10 +57,8 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                         error={errors.gender}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                    >
-                        <option value="man">Man</option>
-                        <option value="woman">Woman</option>
-                    </Select>
+                        options={genders}
+                    ></Select>
                     <PhoneNumberInput
                         id="code"
                         setFieldValue={setFieldValue}
@@ -67,6 +72,7 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                     />
                     <GroupSelect
                         id="contactMethods"
+                        name="contactMethods"
                         label="Contact Methods"
                         options={contactMethods}
                         error={errors?.contactMethods}

@@ -61,7 +61,7 @@ export const validationSchema = {
     basicDetailSchema: yup.object({
         listingName: yup.string('Enter the Listing Name').required('Listing Name is required'),
         age: yup.number().integer().positive().min(18),
-        gender: yup.boolean(),
+        gender: yup.string(),
         code: yup
             .string()
             .matches(phoneRegExp, 'Enter Valid phone number')
@@ -80,7 +80,7 @@ export const listingSchema = [
     yup.object({
         listingName: yup.string('Enter the Listing Name').required('Listing Name is required'),
         age: yup.number().integer().positive().min(18),
-        gender: yup.boolean(),
+        gender: yup.string(),
         code: yup
             .string()
             .matches(phoneRegExp, 'Enter Valid phone number')

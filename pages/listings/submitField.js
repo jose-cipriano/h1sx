@@ -1,12 +1,29 @@
+import { useState } from 'react'
 import { useFormikContext } from 'formik'
 import listingStyles from './listings.module.css'
 import { Button } from '../../components/common/button'
+import { API_ENDPOINTS } from '../../utils/api-endpoints'
+import fetchJson from '../../lib/fetchJson'
+import Spinner from '../../components/common/spinner'
+import { toast } from 'react-toastify'
 
 const SubmitField = ({ disabled }) => {
+    const [status, setStatus] = useState('idle')
     const { values } = useFormikContext()
-    const handleCreateList = () => {
-        // TODO => api request to save listingValue on database
-        console.log('handleCreateList', values)
+    const handleCreateList = async () => {
+        setStatus('pending')
+        await fetchJson(API_ENDPOINTS.LISTING, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                values,
+            }),
+        }).then((res) => {
+            toast(res.message)
+            setStatus('resolve')
+            return
+        })
+        setStatus('resolve')
     }
 
     return (
@@ -22,7 +39,7 @@ const SubmitField = ({ disabled }) => {
                 onClick={handleCreateList}
                 disabled={disabled}
             >
-                create/publish
+                {status === 'pending' ? <Spinner /> : 'create/publish'}
             </Button>
             <Button type="submit">Next</Button>
         </div>

@@ -12,6 +12,7 @@ const GroupSelect = ({
     options,
     upTo,
     values,
+    name,
     ...props
 }) => {
     let fieldSetErrStyle, legendErrStyle
@@ -45,7 +46,7 @@ const GroupSelect = ({
                     {options.map((tag) => (
                         <label key={tag.value} className={styles.badge}>
                             <Field
-                                name="contactMethods"
+                                name={name}
                                 type="checkbox"
                                 value={tag.value}
                                 className={styles.inputSelect}

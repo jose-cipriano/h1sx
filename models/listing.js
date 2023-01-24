@@ -6,116 +6,109 @@ mongoose.Promise = global.Promise
 const ListingSchema = new Schema({
     listingName: {
         type: String,
-        required: true,
+        // required: true,
     },
     age: {
         type: Number,
-        required: true,
+        // required: true,
     },
     gender: {
-        type: Boolean,
-        required: true,
+        type: String,
+        // required: true,
     },
     code: {
-        type: Number,
-        required: true,
+        type: String,
+        // required: true,
     },
     aboutMe: {
         type: String,
-        required: true,
+        // required: true,
     },
     locationCountry: {
         type: String,
-        required: true,
+        // required: true,
     },
     locationCity: {
         type: String,
-        required: true,
+        // required: true,
     },
     mapWithLocation: {
         type: String,
-        required: true,
+        // required: true,
     },
-    contactMethods: [
-        {
-            type: String,
-            required: true,
-        },
-    ],
-    listingPicture: {
-        type: File,
-    },
+    contactMethods: [String],
+    // listingPicture: {},
     nationality: {
         type: String,
-        required: true,
+        // required: true,
     },
     i_speak: {
         type: String,
-        required: true,
+        // required: true,
     },
     orientation: {
         type: String,
-        required: true,
+        // required: true,
     },
     i_meet: {
         type: String,
-        required: true,
+        // required: true,
     },
     available_for: {
         type: String,
-        required: true,
+        // required: true,
     },
     height: {
         type: String,
-        required: true,
+        // required: true,
     },
     weight: {
         type: String,
-        required: true,
+        // required: true,
     },
     cup_size: {
         type: String,
-        required: true,
+        // required: true,
     },
     breast_type: {
         type: String,
-        required: true,
+        // required: true,
     },
     penis_length: {
         type: String,
-        required: true,
+        // required: true,
     },
     penis_girth: {
         type: String,
-        required: true,
+        // required: true,
     },
     hair_color: {
         type: String,
-        required: true,
+        // required: true,
     },
     eye_color: {
         type: String,
-        required: true,
+        // required: true,
     },
     intimate_hair: {
         type: String,
-        required: true,
+        // required: true,
     },
     bodyart: {
         type: String,
-        required: true,
+        // required: true,
     },
     smoking: {
         type: String,
-        required: true,
+        // required: true,
     },
     drinking: {
         type: String,
-        required: true,
+        // required: true,
     },
     party_play: {
         type: String,
-        required: true,
+        // required: true,
     },
 })
 

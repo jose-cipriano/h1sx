@@ -24,7 +24,8 @@ const steps = [
 ]
 export default function Listings() {
     const [activeStep, setActiveStep] = useState(0)
-    const isLastStep = activeStep === steps.length - 1
+    // const isLastStep = activeStep === steps.length - 1
+    const isLastStep = activeStep === 2
 
     const handleNextForm = () => {
         if (!isLastStep) {
@@ -107,7 +108,7 @@ export default function Listings() {
                         })}
                     </div>
                     <Formik
-                        initialValues={{ age: 18, listingPicture: null }}
+                        initialValues={{ age: 18, listingPicture: null, gender: 'Man' }}
                         validationSchema={listingSchema[activeStep]}
                         onSubmit={handleNextForm}
                     >
