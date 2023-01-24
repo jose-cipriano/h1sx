@@ -32,7 +32,15 @@ export default function Listings() {
         }
     }
 
-    function _renderStepContent(step, touched, errors, handleBlur, handleChange, setFieldValue) {
+    function _renderStepContent({
+        step,
+        touched,
+        errors,
+        handleBlur,
+        handleChange,
+        setFieldValue,
+        values,
+    }) {
         switch (step) {
             case 0:
                 return (
@@ -41,6 +49,7 @@ export default function Listings() {
                         handleBlur={handleBlur}
                         handleChange={handleChange}
                         setFieldValue={setFieldValue}
+                        values={values}
                     />
                 )
             case 1:
@@ -55,10 +64,11 @@ export default function Listings() {
             case 2:
                 return (
                     <MediaGalleryForm
-                        touched={touched}
                         errors={errors}
                         handleBlur={handleBlur}
                         handleChange={handleChange}
+                        setFieldValue={setFieldValue}
+                        values={values}
                     />
                 )
             default:
@@ -97,32 +107,22 @@ export default function Listings() {
                         })}
                     </div>
                     <Formik
-                        initialValues={{ age: 18 }}
+                        initialValues={{ age: 18, listingPicture: null }}
                         validationSchema={listingSchema[activeStep]}
                         onSubmit={handleNextForm}
                     >
-                        {({
-                            touched,
-                            errors,
-                            handleBlur,
-                            handleChange,
-                            setFieldValue,
-                            isSubmitting,
-                            isValidating,
-                        }) => {
+                        {({ touched, errors, handleBlur, handleChange, setFieldValue, values }) => {
                             return (
                                 <Form className={_renderClassName(activeStep)}>
-                                    {_renderStepContent(
-                                        activeStep,
+                                    {_renderStepContent({
+                                        step: activeStep,
                                         touched,
                                         errors,
                                         handleBlur,
                                         handleChange,
                                         setFieldValue,
-                                        isSubmitting,
-                                        isValidating,
-                                        isValidating,
-                                    )}
+                                        values,
+                                    })}
                                     <SubmitField disabled={!isLastStep} />
                                 </Form>
                             )

@@ -13,8 +13,8 @@ const DatePicker = ({
     disabled,
     ...props
 }) => {
-    let wrapperStyle = { border: border }
-    let labelErrorStyle
+    let wrapperStyle = { border: border },
+        labelErrorStyle
 
     if (!!error) {
         wrapperStyle = {

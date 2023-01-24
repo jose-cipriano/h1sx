@@ -1,8 +1,9 @@
 import mediaGalleryStyle from './mediaGallery.module.css'
 import { ImageView } from '../../components/common/image-view'
+import ImageInput from '../../components/common/form/image-input'
 import { useState } from 'react'
 
-const MediaGalleryForm = () => {
+const MediaGalleryForm = ({ errors, handleChange, handleBlur, setFieldValue }) => {
     const Images = []
     const [imgGallery, setImgGallery] = useState('')
 
@@ -37,7 +38,18 @@ const MediaGalleryForm = () => {
                                 )
                             })}
                         <div className={mediaGalleryStyle.uploadImage}>
-                            <button className={mediaGalleryStyle.uploadImageBtn}>+</button>
+                            <ImageInput
+                                id="uploadForMediaGallery"
+                                label="uploadForMediaGallery"
+                                name="uploadForMediaGallery"
+                                background="white"
+                                autoComplete="off"
+                                error={errors?.uploadForMediaGallery}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                setFieldValue={setFieldValue}
+                                className={mediaGalleryStyle.uploadImageBtn}
+                            />
                         </div>
                     </div>
                 </div>

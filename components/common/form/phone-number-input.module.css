@@ -3,11 +3,10 @@
     margin: 0.5rem auto;
 }
 
-.wrapper {
+.fieldset {
     width: 30rem;
     max-width: 100%;
-    margin: 0;
-    padding: 0;
+    padding: 0.5rem 0.5rem 1rem;
     border-width: 1px;
     border-style: solid;
     border-color: var(--color-grey);
@@ -15,24 +14,11 @@
     transition: all 0.25s ease-in-out;
 }
 
-.wrapper:hover {
+.fieldset:hover {
     border-color: var(--color-grey-50);
 }
 
-.wrapper:hover label {
-    color: var(--color-grey-dark);
-}
-
-.wrapper:focus-within {
-    border-color: var(--color-green);
-}
-
-.wrapper input {
-    border: none;
-    outline: none;
-}
-
-.wrapper input:focus {
+.fieldset input {
     border: none;
     outline: none;
 }
@@ -56,20 +42,6 @@
     cursor: pointer;
 }
 
-.label {
-    font-size: 1.2rem;
-    color: var(--color-grey);
-    padding: 0.5rem 1rem;
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    left: 1rem;
-    transform-origin: top left;
-    transform: translate(0, 0.5rem) scale(1);
-    transition: all 0.25s ease-in-out;
-    background-color: white;
-}
-
 .input {
     background: none;
     color: black;
@@ -82,6 +54,7 @@
     border: none;
     border-radius: 0;
     font-family: 'Montserrat', sans-serif;
+    
 }
 
 .input::placeholder {

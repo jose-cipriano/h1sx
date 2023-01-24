@@ -15,14 +15,13 @@ const PhoneNumberInput = ({
     setFieldValue,
     ...props
 }) => {
-    let wrapperStyle = { border: border }
-    let labelErrorStyle
+    let fieldSetErrStyle, legendErrStyle
 
     if (!!error) {
-        wrapperStyle = {
+        fieldSetErrStyle = {
             border: '1px solid var(--color-red)',
         }
-        labelErrorStyle = {
+        legendErrStyle = {
             color: 'var(--color-red)',
         }
     }
@@ -38,25 +37,28 @@ const PhoneNumberInput = ({
 
     return (
         <div className={styles.container}>
-            <div className={styles.wrapper} style={wrapperStyle}>
+            <fieldset className={styles.fieldset} style={fieldSetErrStyle}>
+                <legend
+                    className={styles.phoneInputLegend}
+                    style={{
+                        marginLeft: '4px',
+                        color: 'var(--color-grey)',
+                        fontSize: '0.96rem',
+                        textTransform: 'initial',
+                        fontWeight: 'initial',
+                        ...legendErrStyle,
+                    }}
+                >
+                    Phone number
+                </legend>
                 <PhoneInput
-                    className={styles.input}
                     onBlur={onBlur}
                     id={id}
                     defaultCountry="US"
                     onChange={onValueChange}
                     {...props}
                 />
-                <label
-                    className={styles.label}
-                    background={background}
-                    error={error}
-                    htmlFor={id}
-                    style={labelErrorStyle}
-                >
-                    {label}
-                </label>
-            </div>
+            </fieldset>
             <p className={styles.error} lh="1.4" align="left" color="red-1">
                 {error}
             </p>
