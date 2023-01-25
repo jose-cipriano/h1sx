@@ -15,51 +15,45 @@ const Select = ({
     name,
     ...props
 }) => {
-    let wrapperStyle = { border: border },
-        labelErrorStyle
+    let fieldSetErrStyle, legendErrStyle
 
     if (!!error) {
-        wrapperStyle = {
+        fieldSetErrStyle = {
             border: '1px solid var(--color-red)',
         }
-        labelErrorStyle = {
+        legendErrStyle = {
             color: 'var(--color-red)',
         }
     }
-
+    console.log('options===>', options)
     return (
         <div className={styles.container}>
-            <div className={styles.wrapper} style={wrapperStyle}>
-                <select
-                    className={styles.select}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    name={name}
-                    id={id}
-                    {...props}
-                >
-                    {options.map((opt) => {
-                        return (
-                            <option key={opt.value} value={opt.value}>
-                                {opt.label}
-                            </option>
-                        )
-                    })}
-                </select>
-                <label
-                    className={styles.label}
-                    background={background}
-                    error={error}
-                    htmlFor={id}
-                    style={labelErrorStyle}
+            <fieldset className={styles.fieldset} {...props}>
+                <legend
+                    style={{
+                        marginLeft: '4px',
+                        color: 'var(--color-grey)',
+                        fontSize: '0.96rem',
+                        textTransform: 'initial',
+                        fontWeight: 'initial',
+                        ...legendErrStyle,
+                    }}
+                    className={styles.optionSelectLegend}
                 >
                     {label}
-                </label>
-            </div>
-            <p className={styles.error} lh="1.4" align="left" color="red-1">
-                {error}
-            </p>
-            {error && <div className={styles.styledError} onClick={handleError} />}
+                </legend>
+                <div>
+                    <Field name={name} as="select" className={styles.optionSelect}>
+                        {options?.map((opt) => {
+                            return (
+                                <option key={opt} value={opt}>
+                                    {opt}
+                                </option>
+                            )
+                        })}
+                    </Field>
+                </div>
+            </fieldset>
         </div>
     )
 }

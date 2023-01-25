@@ -3,7 +3,7 @@ import { ImageView } from '../../components/common/image-view'
 import ThumbnailInput from '../../components/common/form/thumbnail-input'
 import { useState } from 'react'
 
-const MediaGalleryForm = ({ errors, handleChange, handleBlur, setFieldValue }) => {
+const MediaGalleryForm = () => {
     const Images = []
     const [imgGallery, setImgGallery] = useState('')
 

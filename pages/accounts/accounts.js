@@ -12,7 +12,8 @@ import DatePicker from '../../components/common/form/date-picker'
 
 export default function Accounts() {
     const [status, setStatus] = useState('idle')
-    // const [isAgency, setIsAgency] = useState(false)
+    const roles = ['visitor', 'indivisual', 'agency']
+    const accountStates = ['active', 'inActive']
     const addAccount = async ({
         email,
         password,
@@ -51,7 +52,7 @@ export default function Accounts() {
         <div className={Tabstyles.location}>
             <div className={Tabstyles.TabsBlock}>
                 <Formik
-                    initialValues={{ limit: 1, accountStatus: 'active' }}
+                    initialValues={{ limit: 1, accountStatus: 'active', role: 'visitor' }}
                     validationSchema={validationSchema.accountSchema}
                     onSubmit={addAccount}
                 >
@@ -91,13 +92,9 @@ export default function Accounts() {
                                         label="Select Role"
                                         error={touched.role && errors?.role}
                                         onChange={handleChange}
+                                        options={roles}
                                         required
-                                    >
-                                        <option value="">Select Role</option>
-                                        <option value="visitor">Visitor</option>
-                                        <option value="individual">Individual</option>
-                                        <option value="agency">Agency</option>
-                                    </Select>
+                                    />
                                 </div>
                                 <div className={Tabstyles.input_field}>
                                     <Input
@@ -157,11 +154,9 @@ export default function Accounts() {
                                         label="Select Status"
                                         error={touched.accountStatus && errors?.accountStatus}
                                         onChange={handleChange}
+                                        options={accountStates}
                                         required
-                                    >
-                                        <option value="active">Active</option>
-                                        <option value="inActive">InActive</option>
-                                    </Select>
+                                    />
                                     <DatePicker
                                         id="birthday"
                                         label="birthday"
