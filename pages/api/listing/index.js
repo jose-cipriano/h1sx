@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
 import dbConnect from '../../../lib/mongodb'
-import Listing from '../../../models/Listing'
+//import Listing from '@/models/listing'
 
 async function handler(req, res) {
     await dbConnect()
