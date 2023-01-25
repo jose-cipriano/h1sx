@@ -7,20 +7,9 @@ import basicDetailsStyles from './basicDetails.module.css'
 import GroupSelect from '../../components/common/form/group-select'
 
 const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, values }) => {
-    const contactMethods = [
-        { label: 'Call', value: 'Call' },
-        { label: 'SMS', value: 'SMS' },
-        { label: 'WhatsApp', value: 'WhatsApp' },
-        { label: 'Viber', value: 'Viber' },
-        { label: 'Telegram', value: 'Telegram' },
-    ]
+    const contactMethods = ['Call', 'SMS', 'WhatsApp', 'Viber', 'Telegram']
+    const genders = ['Man', 'Woman']
 
-    const genders = [
-        { label: 'Man', value: 'Man' },
-        { label: 'Woman', value: 'Woman' },
-    ]
-
-    console.log(values, errors)
     return (
         <>
             <div className={basicDetailsStyles.info_1}>
@@ -58,7 +47,8 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                         onChange={handleChange}
                         onBlur={handleBlur}
                         options={genders}
-                    ></Select>
+                        setFieldValue={setFieldValue}
+                    />
                     <PhoneNumberInput
                         id="code"
                         setFieldValue={setFieldValue}
@@ -76,7 +66,6 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                         label="Contact Methods"
                         options={contactMethods}
                         error={errors?.contactMethods}
-                        onChange={handleChange}
                         upTo={5}
                         values={values}
                     />
