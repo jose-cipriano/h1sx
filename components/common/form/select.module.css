@@ -1,13 +1,12 @@
 .container {
     position: relative;
-    margin: 0.5rem auto;
+    margin: 0.5rem auto 2rem;
 }
 
-.wrapper {
+.fieldset {
     width: 30rem;
     max-width: 100%;
-    margin: 0;
-    padding: 0;
+    padding: 0.5rem;
     border-width: 1px;
     border-style: solid;
     border-color: var(--color-grey);
@@ -15,17 +14,20 @@
     transition: all 0.25s ease-in-out;
 }
 
-.wrapper:hover {
+.fieldset:hover {
     border-color: var(--color-grey-50);
 }
 
-.wrapper:hover label {
-    color: var(--color-grey-dark);
+.optionSelect {
+    width: 100%;
+    border: none;
+    outline: none;
 }
 
-.wrapper:focus-within {
-    border-color: var(--color-green);
+.optionSelect option {
+    border: none;
 }
+
 
 .error {
     margin: 0;

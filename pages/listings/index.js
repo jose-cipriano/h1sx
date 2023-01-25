@@ -65,11 +65,11 @@ export default function Listings() {
             case 2:
                 return (
                     <MediaGalleryForm
-                        errors={errors}
-                        handleBlur={handleBlur}
-                        handleChange={handleChange}
-                        setFieldValue={setFieldValue}
-                        values={values}
+                    // errors={errors}
+                    // handleBlur={handleBlur}
+                    // handleChange={handleChange}
+                    // setFieldValue={setFieldValue}
+                    // values={values}
                     />
                 )
             default:
@@ -108,7 +108,12 @@ export default function Listings() {
                         })}
                     </div>
                     <Formik
-                        initialValues={{ age: 18, listingPicture: null, gender: 'Man' }}
+                        initialValues={{
+                            age: 18,
+                            listingPicture: null,
+                            gender: 'Man',
+                            contactMethods: [],
+                        }}
                         validationSchema={listingSchema[activeStep]}
                         onSubmit={handleNextForm}
                     >

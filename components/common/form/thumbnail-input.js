@@ -13,7 +13,6 @@ const ThumbnailInput = ({
     handleError,
     onChange,
     onBlur,
-    setFieldValue,
     ...props
 }) => {
     const [imgSrc, setImgSrc] = useState(null)

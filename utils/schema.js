@@ -58,22 +58,6 @@ export const validationSchema = {
         role: yup.string('Enter the role').required('Role is required'),
         limit: yup.number().integer().positive().min(0),
     }),
-    basicDetailSchema: yup.object({
-        listingName: yup.string('Enter the Listing Name').required('Listing Name is required'),
-        age: yup.number().integer().positive().min(18),
-        gender: yup.string(),
-        code: yup
-            .string()
-            .matches(phoneRegExp, 'Enter Valid phone number')
-            .required('Phone number is required'),
-        contactMethods: yup.string('Enter Contact Methods').required('Contact Method is required'),
-        aboutMe: yup.string('Enter your detail').required('Your Information is required'),
-        locationCountry: yup
-            .string('Enter your Country')
-            .required('Your Country location is required'),
-        locationCity: yup.string('Enter your City').required('Your City location is required'),
-        mapWithLocation: yup.string('Enter your location pin').required('This field is required'),
-    }),
 }
 
 export const listingSchema = [

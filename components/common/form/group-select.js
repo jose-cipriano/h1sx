@@ -2,19 +2,7 @@ import { Field } from 'formik'
 import React from 'react'
 import styles from './group-select.module.css'
 
-const GroupSelect = ({
-    label,
-    id,
-    error,
-    handleError,
-    onChange,
-    onBlur,
-    options,
-    upTo,
-    values,
-    name,
-    ...props
-}) => {
+const GroupSelect = ({ label, id, error, onBlur, options, upTo, values, name, ...props }) => {
     let fieldSetErrStyle, legendErrStyle
 
     if (!!error) {
@@ -42,16 +30,16 @@ const GroupSelect = ({
                 >
                     {label}
                 </legend>
-                <div className={styles.selectGroups}>
-                    {options.map((tag) => (
-                        <label key={tag.value} className={styles.badge}>
+                <div className={styles.selectGroups} role="group" aria-labelledby="checkbox-group">
+                    {options.map((tag, idx) => (
+                        <label key={tag} className={styles.badge}>
                             <Field
-                                name={name}
+                                name={name[idx]}
                                 type="checkbox"
-                                value={tag.value}
+                                value={tag}
                                 className={styles.inputSelect}
                             />
-                            <span>{tag.label}</span>
+                            <span>{tag}</span>
                         </label>
                     ))}
                 </div>
