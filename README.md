@@ -1,3 +1,3 @@
 # H1SX
 
-app
+app dev
