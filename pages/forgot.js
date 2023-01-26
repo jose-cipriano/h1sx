@@ -53,7 +53,7 @@ const ForgotPass = () => {
                             validationSchema={validationSchema.forgotSchema}
                             onSubmit={handleForgot}
                         >
-                            {({ touched, errors, handleBlur, handleChange }) => {
+                            {({ touched, errors, handleBlur, handleChange, values }) => {
                                 return (
                                     <div>
                                         <Form className={loginstyles.loginForm}>
@@ -73,6 +73,7 @@ const ForgotPass = () => {
                                                     handleChange(...args)
                                                 }}
                                                 onBlur={handleBlur}
+                                                values={values}
                                                 required
                                             />
                                             <div className={loginstyles.crFormCta}>
