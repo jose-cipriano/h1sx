@@ -22,10 +22,10 @@ async function handler(req, res) {
                 } = req.body
                 try {
                     const oneUser = await Account.find({ username: email })
-                    if (role === 'visitor' && limit > 1) {
+                    if (role === 'individual' && limit > 1) {
                         res.status(200).json({
                             success: false,
-                            message: "Visitor's post limit can't be more than 1",
+                            message: "Individual's post limit can't be more than 1",
                         })
                         return
                     }

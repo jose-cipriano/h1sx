@@ -12,8 +12,9 @@ import DatePicker from '../../components/common/form/date-picker'
 
 export default function Accounts() {
     const [status, setStatus] = useState('idle')
-    const roles = ['visitor', 'indivisual', 'agency']
+    const roles = ['Individual', 'Agency']
     const accountStates = ['active', 'inActive']
+
     const addAccount = async ({
         email,
         password,
@@ -52,7 +53,7 @@ export default function Accounts() {
         <div className={Tabstyles.location}>
             <div className={Tabstyles.TabsBlock}>
                 <Formik
-                    initialValues={{ limit: 1, accountStatus: 'active', role: 'visitor' }}
+                    initialValues={{ limit: 1, accountStatus: 'active', role: 'individual' }}
                     validationSchema={validationSchema.accountSchema}
                     onSubmit={addAccount}
                 >

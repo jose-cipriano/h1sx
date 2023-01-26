@@ -77,7 +77,7 @@
    /* Borders */
    --border-radius-button-default: .5rem;
    --border-radius-default: 0.5rem;
-   --border-radius-form-imput: 1rem;
+   --border-radius-form-input: .5rem;
 
    /* Shadows */
    --box-shadow-default: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.5), 0 0 0 1px rgba(10, 10, 10, 0.02);
