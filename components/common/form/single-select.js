@@ -1,9 +1,20 @@
 import { Field } from 'formik'
 import React from 'react'
-import styles from './group-select.module.css'
+import styles from './single-select.module.css'
 
-const GroupSelect = ({ label, id, error, onBlur, options, values, name, ...props }) => {
-    let fieldSetStyle, legendStyle, badgeErrStyle
+const SingleSelect = ({
+    label,
+    id,
+    error,
+    onBlur,
+    options,
+    upTo,
+    values,
+    name,
+    touched,
+    ...props
+}) => {
+    let fieldSetStyle, legendStyle, badgeStyle
 
     if (!!error) {
         fieldSetStyle = {
@@ -12,7 +23,7 @@ const GroupSelect = ({ label, id, error, onBlur, options, values, name, ...props
         legendStyle = {
             color: 'var(--color-red)',
         }
-        badgeErrStyle = {
+        badgeStyle = {
             border: '1px solid var(--color-red)',
             color: 'var(--color-red)',
         }
@@ -39,20 +50,21 @@ const GroupSelect = ({ label, id, error, onBlur, options, values, name, ...props
                         fontWeight: 'initial',
                         ...legendStyle,
                     }}
-                    className={styles.groupSelectLegend}
+                    className={styles.singleSelectLegend}
                 >
                     {label}
                 </legend>
-                <div className={styles.selectGroups} role="group" aria-labelledby="checkbox-group">
+                <div className={styles.selectGroups} role="group" aria-labelledby="radio-group">
                     {options.map((tag) => (
                         <label key={tag} className={styles.badge}>
                             <Field
                                 name={name}
-                                type="checkbox"
+                                touched={touched}
+                                type="radio"
                                 value={tag}
                                 className={styles.inputSelect}
                             />
-                            <span style={badgeErrStyle}>{tag}</span>
+                            <span style={badgeStyle}>{tag}</span>
                         </label>
                     ))}
                 </div>
@@ -65,4 +77,4 @@ const GroupSelect = ({ label, id, error, onBlur, options, values, name, ...props
     )
 }
 
-export default GroupSelect
+export default SingleSelect

@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 
 const phoneRegExp = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
-const FILE_SIZE = 500
+const FILE_SIZE = 50000000000000000000
 const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png']
 
 export const validationSchema = {
@@ -62,35 +62,31 @@ export const validationSchema = {
 
 export const listingSchema = [
     yup.object({
-        listingName: yup.string('Enter the Listing Name').required('Listing Name is required'),
+        listingName: yup.string().required('required information').max(12, 'max 12 characters'),
         age: yup.number().integer().positive().min(18),
-        gender: yup.string(),
+        gender: yup.string().required('required information'),
         code: yup
             .string()
             .matches(phoneRegExp, 'Enter Valid phone number')
             .required('Phone number is required'),
         aboutMe: yup.string('Enter your detail').required('Your Information is required'),
-        locationCountry: yup
-            .string('Enter your Country')
-            .required('Your Country location is required'),
-        locationCity: yup.string('Enter your City').required('Your City location is required'),
-        mapWithLocation: yup.string('Enter your location pin').required('This field is required'),
-        contactMethods: yup
-            .array()
-            .of(yup.string().required('Required field'))
-            .required('Required'),
+        locationCountry: yup.string().required('Your Country location is required'),
+        locationCity: yup.string().required('Your City location is required'),
+        contactMethods: yup.array().min(1, 'required, select up to five (5) values'),
         listingPicture: yup
-            .object()
-            .shape({
-                file: yup
-                    .mixed()
-                    .test('fileSize', 'File Size is too large', (value) => value.size <= FILE_SIZE)
-                    .test('fileType', 'Unsupported File Format', (value) =>
-                        SUPPORTED_FORMATS.includes(value.type),
-                    )
-                    .required('A file is required.'),
-            })
-            .nullable(),
+            .mixed()
+            // .test(
+            //     'fileSize',
+            //     'File Size is too large',
+            //     (value) => value === null || (value && value.size <= FILE_SIZE),
+            // )
+            // .test(
+            //     'fileFormat',
+            //     'Unsupported File Format',
+            //     (value) => value === null || (value && SUPPORTED_FORMATS.includes(value.type)),
+            // )
+            .nullable()
+            .required('A listing picture is required.'),
     }),
     yup.object({
         nationality: yup.string('Enter the Nationality').required('Nationality is required'),

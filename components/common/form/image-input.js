@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
-import { useRef } from 'react'
+import ImageUploading from 'react-images-uploading'
 import styles from './image-input.module.css'
 
 const ImageInput = ({
@@ -14,68 +14,102 @@ const ImageInput = ({
     onChange,
     onBlur,
     setFieldValue,
+    values,
+    height,
     ...props
 }) => {
-    const [imgSrc, setImgSrc] = useState(null)
-    const ref = useRef()
-    let wrapperStyle = { border: border },
-        labelErrorStyle
+    let fieldSetStyle, legendStyle
 
     if (!!error) {
-        wrapperStyle = {
+        fieldSetStyle = {
             border: '1px solid var(--color-red)',
         }
-        labelErrorStyle = {
+        legendStyle = {
             color: 'var(--color-red)',
         }
+    } else {
+        if (values[name]) {
+            fieldSetStyle = {
+                border: '1px solid var(--color-green)',
+            }
+            legendStyle = {
+                color: 'var(--color-green)',
+            }
+        }
+    }
+
+    const [images, setImages] = useState([])
+    const onChangeImg = (imageList, addUpdateIndex) => {
+        // data for submit
+        setImages(imageList)
+        setFieldValue(name, imageList[0])
     }
 
     return (
         <div className={styles.container}>
-            <div className={styles.wrapper} style={wrapperStyle} width="300px">
-                <input
-                    ref={ref}
-                    className={styles.input}
-                    onBlur={onBlur}
-                    id={id}
-                    name={name}
-                    type="file"
-                    onChange={(e) => {
-                        let file = e.target.files[0]
-                        let reader = new FileReader()
-                        let url = reader.readAsDataURL(file)
-
-                        reader.onloadend = function (e) {
-                            setImgSrc([reader.result])
-                        }
-                        console.log(url)
-                        setFieldValue(name, e.currentTarget.files[0])
+            <fieldset
+                className={styles.fieldset}
+                style={{ ...fieldSetStyle, height: height }}
+                {...props}
+            >
+                <legend
+                    className={styles.imageInputLegend}
+                    style={{
+                        marginLeft: '4px',
+                        color: 'var(--color-grey)',
+                        fontSize: '0.96rem',
+                        textTransform: 'initial',
+                        fontWeight: 'initial',
+                        backgroundColor: 'transparent',
+                        zIndex: 100,
+                        position: 'relative',
+                        ...legendStyle,
                     }}
-                    style={{ color: props.inputColor ? props.inputColor : null }}
-                    {...props}
-                />
-                <div className={styles.fakeFile}>
-                    <input className={styles.fakeInput} />
-                </div>
-                <label
-                    className={styles.label}
-                    background={background}
-                    error={error}
-                    htmlFor={id}
-                    style={labelErrorStyle}
                 >
                     {label}
-                </label>
-                {imgSrc?.length && (
-                    <Image
-                        className={styles.preview}
-                        src={imgSrc[0]}
-                        alt="uploaded_image"
-                        width={285}
-                        height={280}
-                    />
-                )}
-            </div>
+                </legend>
+                <ImageUploading
+                    value={images}
+                    onChange={onChangeImg}
+                    dataURLKey="data_url"
+                    acceptType={['jpg', 'png', 'jpeg']}
+                >
+                    {({ imageList, onImageUpload, onImageUpdate, isDragging, dragProps }) => (
+                        <div
+                            className={styles.uploadImageWrapper}
+                            style={isDragging ? { color: 'red' } : null}
+                            onClick={onImageUpload}
+                            {...dragProps}
+                        >
+                            <div className={styles.circle} />
+                            <ul className={styles.imageCover}>
+                                <li>max. file size is 20mb</li>
+                                <li>supported files are jpeg, png, webp</li>
+                                <li>portrait oriented recommended (2:3 ratio)</li>
+                                <li>
+                                    new uploads/modifications will be approaved manually - this can
+                                    take up to 12h
+                                </li>
+                                <li>restrictions: genitals (vagina, penis)</li>
+                            </ul>
+                            {imageList.map((image, idx) => (
+                                <div key={idx} className={styles.imageItem}>
+                                    <Image
+                                        src={image.data_url}
+                                        alt=""
+                                        layout="fill"
+                                        objectFit="cover"
+                                    />
+                                    <div className={styles.imageItemBtnWrapper}>
+                                        <button onClick={() => onImageUpdate(idx)}></button>
+                                        {/* <button onClick={() => onImageRemove(index)}>Remove</button> */}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </ImageUploading>
+            </fieldset>
             <p className={styles.error} lh="1.4" align="left" color="red-1">
                 {error}
             </p>

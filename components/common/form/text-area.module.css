@@ -46,16 +46,16 @@
     cursor: pointer;
 }
 
-.input:valid ~ label {
+.textArea:valid ~ label {
     transform: translate(0, -1rem) scale(0.8);
 }
 
-.input:focus ~ label {
+.textArea:focus ~ label {
     transform: translate(0, -1rem) scale(0.8);
     color: var(--color-green);
 }
 
-.label {
+.textAreaLabel {
     font-size: 1.2rem;
     color: var(--color-grey);
     padding: 0.5rem 1rem;
@@ -69,7 +69,7 @@
     background-color: white;
 }
 
-.input {
+.textArea {
     background: none;
     color: black;
     height: 125px;
@@ -85,18 +85,18 @@
     resize: none;
 }
 
-.input::placeholder {
+.textArea::placeholder {
     opacity: 0;
     transition: opacity 0.25s;
     padding-left: 0.3rem;
     font-weight: 500;
 }
 
-.input:focus {
+.textArea:focus {
     outline: none;
 }
 
-.input:focus::placeholder {
+.textArea:focus::placeholder {
     opacity: 0.7;
     color: var(--color-grey-50);
 }

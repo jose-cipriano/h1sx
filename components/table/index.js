@@ -54,7 +54,13 @@ export const TableRecord = ({ records, handleDelete, handleEdit, title, addBtn, 
                                             setShowModal(-1)
                                         }}
                                     >
-                                        {({ touched, errors, handleBlur, handleChange }) => {
+                                        {({
+                                            touched,
+                                            errors,
+                                            handleBlur,
+                                            handleChange,
+                                            values,
+                                        }) => {
                                             return (
                                                 <Form>
                                                     <Input
@@ -71,6 +77,7 @@ export const TableRecord = ({ records, handleDelete, handleEdit, title, addBtn, 
                                                         }}
                                                         onBlur={handleBlur}
                                                         defaultValue={record.name}
+                                                        values={values}
                                                         required
                                                     />
                                                     <div className={tableStyles.crFormCta}>

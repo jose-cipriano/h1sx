@@ -36,7 +36,7 @@ const ThumbnailInput = ({
             <div className={styles.wrapper} style={wrapperStyle}>
                 {/* <input
                     ref={ref}
-                    className={styles.input}
+                    className={styles.thumbnailInput}
                     onBlur={onBlur}
                     id={id}
                     name={name}
@@ -59,7 +59,7 @@ const ThumbnailInput = ({
                     <input className={styles.fakeInput} />
                 </div>
                 <label
-                    className={styles.label}
+                    className={styles.thumbnailInputLabel}
                     background={background}
                     error={error}
                     htmlFor={id}

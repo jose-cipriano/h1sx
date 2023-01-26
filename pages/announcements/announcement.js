@@ -82,7 +82,7 @@ export default function Announcement() {
                     validationSchema={validationSchema.announcementSchema}
                     onSubmit={addAnnouncement}
                 >
-                    {({ touched, errors, handleBlur, handleChange }) => {
+                    {({ touched, errors, handleBlur, handleChange, values }) => {
                         return (
                             <Form className={Tabstyles.form}>
                                 <Input
@@ -96,6 +96,7 @@ export default function Announcement() {
                                     error={touched.announcement && errors?.announcement}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    values={values}
                                     required
                                 />
                                 <div className={Tabstyles.crFormCta}>

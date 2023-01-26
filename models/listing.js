@@ -6,31 +6,31 @@ mongoose.Promise = global.Promise
 const ListingSchema = new Schema({
     listingName: {
         type: String,
-        // required: true,
+        required: true,
     },
     age: {
         type: Number,
-        // required: true,
+        required: true,
     },
     gender: {
         type: String,
-        // required: true,
+        required: true,
     },
     code: {
         type: String,
-        // required: true,
+        required: true,
     },
     aboutMe: {
         type: String,
-        // required: true,
+        required: true,
     },
     locationCountry: {
         type: String,
-        // required: true,
+        required: true,
     },
     locationCity: {
         type: String,
-        // required: true,
+        required: true,
     },
     mapWithLocation: {
         type: String,

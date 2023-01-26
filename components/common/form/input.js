@@ -10,17 +10,28 @@ const Input = ({
     handleError,
     onChange,
     onBlur,
+    name,
+    values,
     ...props
 }) => {
     let wrapperStyle = { border: border },
-        labelErrorStyle
+        labelStyle
 
     if (!!error) {
         wrapperStyle = {
             border: '1px solid var(--color-red)',
         }
-        labelErrorStyle = {
+        labelStyle = {
             color: 'var(--color-red)',
+        }
+    } else {
+        if (values[name]) {
+            wrapperStyle = {
+                border: '1px solid var(--color-green)',
+            }
+            labelStyle = {
+                color: 'var(--color-green)',
+            }
         }
     }
 
@@ -30,6 +41,7 @@ const Input = ({
                 <input
                     className={styles.input}
                     onChange={onChange}
+                    name={name}
                     onBlur={onBlur}
                     id={id}
                     style={{ color: props.inputColor ? props.inputColor : null }}
@@ -40,7 +52,7 @@ const Input = ({
                     background={background}
                     error={error}
                     htmlFor={id}
-                    style={labelErrorStyle}
+                    style={labelStyle}
                 >
                     {label}
                 </label>

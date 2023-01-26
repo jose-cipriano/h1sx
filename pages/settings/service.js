@@ -81,7 +81,7 @@ export default function Service() {
                     validationSchema={validationSchema.serviceSchema}
                     onSubmit={addService}
                 >
-                    {({ touched, errors, handleBlur, handleChange }) => {
+                    {({ touched, errors, handleBlur, handleChange, values }) => {
                         return (
                             <Form className={Tabstyles.form}>
                                 <Input
@@ -95,6 +95,7 @@ export default function Service() {
                                     error={touched.service && errors?.service}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    values={values}
                                     required
                                 />
                                 <div className={Tabstyles.crFormCta}>

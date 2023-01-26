@@ -81,7 +81,7 @@ export default function Category() {
                     validationSchema={validationSchema.categorySchema}
                     onSubmit={addCategory}
                 >
-                    {({ touched, errors, handleBlur, handleChange }) => {
+                    {({ touched, errors, handleBlur, handleChange, values }) => {
                         return (
                             <Form className={Tabstyles.form}>
                                 <Input
@@ -95,6 +95,7 @@ export default function Category() {
                                     error={touched.category && errors?.category}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    values={values}
                                     required
                                 />
                                 <div className={Tabstyles.crFormCta}>

@@ -11,36 +11,47 @@ const DatePicker = ({
     onChange,
     onBlur,
     disabled,
+    values,
+    name,
     ...props
 }) => {
     let wrapperStyle = { border: border },
-        labelErrorStyle
+        labelStyle
 
     if (!!error) {
         wrapperStyle = {
             border: '1px solid var(--color-red)',
         }
-        labelErrorStyle = {
+        labelStyle = {
             color: 'var(--color-red)',
+        }
+    } else {
+        if (values[name]) {
+            wrapperStyle = {
+                border: '1px solid var(--color-green)',
+            }
+            labelStyle = {
+                color: 'var(--color-green)',
+            }
         }
     }
 
-    let labelStyle = null
+    let labelDisableStyle = null
     if (disabled) {
-        labelStyle = {
+        labelDisableStyle = {
+            ...labelStyle,
             backgroundColor: 'transparent',
             opacity: 0,
-            ...labelErrorStyle,
         }
     } else {
-        labelStyle = labelErrorStyle
+        labelDisableStyle = labelStyle
     }
 
     return (
         <div className={styles.container}>
             <div className={styles.wrapper} style={wrapperStyle}>
                 <input
-                    className={styles.input}
+                    className={styles.datePicker}
                     onChange={onChange}
                     onBlur={onBlur}
                     id={id}
@@ -50,11 +61,11 @@ const DatePicker = ({
                     type="date"
                 />
                 <label
-                    className={styles.label}
+                    className={styles.datePickerLabel}
                     background={background}
                     error={error}
                     htmlFor={id}
-                    style={labelStyle}
+                    style={labelDisableStyle}
                 >
                     {label}
                 </label>
