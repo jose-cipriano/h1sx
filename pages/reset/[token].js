@@ -105,6 +105,7 @@ export default function ResetPassword() {
                                         error={formik.touched.password && formik.errors?.password}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
+                                        values={formik.values}
                                         required
                                     />
                                     <Input
@@ -120,6 +121,7 @@ export default function ResetPassword() {
                                         }
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
+                                        values={formik.values}
                                         required
                                     />
                                     <div className={loginstyles.crFormCta}>
