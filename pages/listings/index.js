@@ -1,8 +1,10 @@
 // libs
 import { useState } from 'react'
 import { Form, Formik } from 'formik'
+import { toast } from 'react-toastify'
 import Layout from '../../components/layout/Layout'
 import { AnnouncementProvider } from '../../contexts/announcement'
+
 // multipart forms
 import BasicDetailsForm from './basicDetails'
 import CharacteristicsForm from './characteristics'
@@ -14,6 +16,8 @@ import Tabstyles from '../../styles/Tabs.module.css'
 import listingStyles from './listings.module.css'
 // utils
 import { listingSchema } from '../../utils/schema'
+import { API_ENDPOINTS } from '../../utils/api-endpoints'
+import fetchJson from '../../lib/fetchJson'
 
 const steps = [
     'basic details',
@@ -23,14 +27,60 @@ const steps = [
     'availability & rates',
 ]
 export default function Listings() {
+    const [status, setStatus] = useState('idle')
     const [activeStep, setActiveStep] = useState(0)
-    // const isLastStep = activeStep === steps.length - 1
-    const isLastStep = activeStep === 2
+    const isLastStep = activeStep === steps.length - 1
+    const isFirstStep = activeStep === 0
 
-    const handleNextForm = () => {
-        if (!isLastStep) {
-            setActiveStep((prev) => prev + 1)
+    const createListingBasicDetails = async ({
+        listingName,
+        age,
+        gender,
+        code,
+        listingPicture,
+        aboutMe,
+        contactMethods,
+        locationCountry,
+        locationCity,
+    }) => {
+        setStatus('pending')
+        await fetchJson(API_ENDPOINTS.LISTING, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                listingName,
+                age,
+                gender,
+                code,
+                listingPicture,
+                aboutMe,
+                contactMethods,
+                locationCountry,
+                locationCity,
+            }),
+        }).then((res) => {
+            toast(res.message)
+            setStatus('resolve')
+            return
+        })
+        setStatus('resolve')
+    }
+
+    const handleNextForm = (values) => {
+        switch (activeStep) {
+            case 0:
+                createListingBasicDetails(values).then((res) => {
+                    console.log('res===>', res)
+                })
+                break
+
+            default:
+                break
         }
+        createListing(values)
+        // if (!isLastStep) {
+        //     setActiveStep((prev) => prev + 1)
+        // }
     }
 
     function _renderStepContent({
@@ -50,6 +100,7 @@ export default function Listings() {
                         handleBlur={handleBlur}
                         handleChange={handleChange}
                         setFieldValue={setFieldValue}
+                        touched={touched}
                         values={values}
                     />
                 )
@@ -110,8 +161,8 @@ export default function Listings() {
                     <Formik
                         initialValues={{
                             age: 18,
+                            gender: '',
                             listingPicture: null,
-                            gender: 'Man',
                             contactMethods: [],
                         }}
                         validationSchema={listingSchema[activeStep]}

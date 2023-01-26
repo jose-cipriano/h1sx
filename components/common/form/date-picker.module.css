@@ -46,7 +46,7 @@
     cursor: pointer;
 }
 
-.input::placeholder {
+.datePicker::placeholder {
     opacity: 0;
     transition: opacity 0.25s;
     padding-left: 0.3rem;
@@ -54,34 +54,34 @@
     display: none;
 }
 
-.input:focus {
+.datePicker:focus {
     outline: none;
 }
 
-.input:focus::placeholder {
+.datePicker:focus::placeholder {
     opacity: 0.7;
     color: var(--color-grey-50);
 }
 
 
-.input:valid ~ label {
+.datePicker:valid ~ label {
     transform: translate(0, -1rem) scale(0.8);
 }
 
-.input:focus ~ label {
+.datePicker:focus ~ label {
     transform: translate(0, -1rem) scale(0.8);
     color: var(--color-green);
 }
 
-.input:disabled {
+.datePicker:disabled {
     background-color: #c6ccd1;
 }
 
-.input:disabled label {
+.datePicker:disabled label {
     background-color: transparent;
 }
 
-.label {
+.datePickerLabel {
     font-size: 1.2rem;
     color: var(--color-grey);
     padding: 0.5rem 1rem;
@@ -95,7 +95,7 @@
     background-color: white;
 }
 
-.input {
+.datePicker {
     background: none;
     color: black;
     height: 35px;

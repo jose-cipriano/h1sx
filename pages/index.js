@@ -83,7 +83,7 @@ export default function Home() {
                         validationSchema={validationSchema.loginSchema}
                         onSubmit={handleSignin}
                     >
-                        {({ touched, errors, handleBlur, handleChange }) => {
+                        {({ touched, errors, handleBlur, handleChange, values }) => {
                             return (
                                 <div className={loginstyles.formWrapper}>
                                     <Form className={loginstyles.loginForm}>
@@ -104,6 +104,7 @@ export default function Home() {
                                                 handleChange(...args)
                                             }}
                                             onBlur={handleBlur}
+                                            values={values}
                                             required
                                         />
                                         <Input
@@ -124,6 +125,7 @@ export default function Home() {
                                                 handleChange(...args)
                                             }}
                                             onBlur={handleBlur}
+                                            values={values}
                                             required
                                         />
                                         <div className={loginstyles.crFormCta}>

@@ -25,7 +25,6 @@ const Select = ({
             color: 'var(--color-red)',
         }
     }
-    console.log('options===>', options)
     return (
         <div className={styles.container}>
             <fieldset className={styles.fieldset} {...props}>

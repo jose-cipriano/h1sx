@@ -10,17 +10,28 @@ const TextArea = ({
     handleError,
     onChange,
     onBlur,
+    name,
+    values,
     ...props
 }) => {
     let wrapperStyle = { border: border },
-        labelErrorStyle
+        labelStyle
 
     if (!!error) {
         wrapperStyle = {
             border: '1px solid var(--color-red)',
         }
-        labelErrorStyle = {
+        labelStyle = {
             color: 'var(--color-red)',
+        }
+    } else {
+        if (values[name]) {
+            wrapperStyle = {
+                border: '1px solid var(--color-green)',
+            }
+            labelStyle = {
+                color: 'var(--color-green)',
+            }
         }
     }
 
@@ -28,7 +39,7 @@ const TextArea = ({
         <div className={styles.container}>
             <div className={styles.wrapper} style={wrapperStyle}>
                 <textarea
-                    className={styles.input}
+                    className={styles.textArea}
                     onChange={onChange}
                     onBlur={onBlur}
                     id={id}
@@ -36,11 +47,11 @@ const TextArea = ({
                     {...props}
                 />
                 <label
-                    className={styles.label}
+                    className={styles.textAreaLabel}
                     background={background}
                     error={error}
                     htmlFor={id}
-                    style={labelErrorStyle}
+                    style={labelStyle}
                 >
                     {label}
                 </label>

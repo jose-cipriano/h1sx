@@ -2,25 +2,25 @@ import Input from '../../components/common/form/input'
 import ImageInput from '../../components/common/form/image-input'
 import TextArea from '../../components/common/form/text-area'
 import PhoneNumberInput from '../../components/common/form/phone-number-input'
-import Select from '../../components/common/form/select'
+import SingleSelect from '../../components/common/form/single-select'
 import basicDetailsStyles from './basicDetails.module.css'
 import GroupSelect from '../../components/common/form/group-select'
 
-const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, values }) => {
+const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, values, touched }) => {
     const contactMethods = ['Call', 'SMS', 'WhatsApp', 'Viber', 'Telegram']
-    const genders = ['Man', 'Woman']
-
+    const genders = ['Female', 'Transgender', 'Male']
     return (
         <>
             <div className={basicDetailsStyles.info_1}>
                 <div className={basicDetailsStyles.info_1__1}>
                     <Input
                         id="listingName"
-                        label="Listing Name"
                         name="listingName"
+                        label="LISTING NAME"
+                        values={values}
                         type="text"
                         background="white"
-                        placeholder="Add Listing Name"
+                        placeholder="please enter your name/alias"
                         autoComplete="off"
                         error={errors.listingName}
                         onChange={handleChange}
@@ -28,8 +28,8 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                     />
                     <Input
                         id="age"
-                        label="Age"
                         name="age"
+                        label="Age"
                         type="number"
                         defaultValue={18}
                         background="white"
@@ -38,16 +38,18 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                         error={errors.age}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        values={values}
                     />
-                    <Select
-                        name="gender"
+                    <SingleSelect
                         id="gender"
-                        label="Select Gender"
+                        name="gender"
+                        label="Gender"
                         error={errors.gender}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        touched={touched}
                         options={genders}
-                        setFieldValue={setFieldValue}
+                        values={values}
                     />
                     <PhoneNumberInput
                         id="code"
@@ -59,21 +61,13 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                         error={errors?.code}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                    />
-                    <GroupSelect
-                        id="contactMethods"
-                        name="contactMethods"
-                        label="Contact Methods"
-                        options={contactMethods}
-                        error={errors?.contactMethods}
-                        upTo={5}
                         values={values}
                     />
                 </div>
                 <div className={basicDetailsStyles.info_1__2}>
                     <ImageInput
                         id="listingPicture"
-                        label="Listing Picture (2:3 Ratio)"
+                        label="Listing Picture"
                         name="listingPicture"
                         background="white"
                         autoComplete="off"
@@ -81,6 +75,8 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                         onChange={handleChange}
                         onBlur={handleBlur}
                         setFieldValue={setFieldValue}
+                        values={values}
+                        height="400px"
                     />
                 </div>
             </div>
@@ -97,28 +93,25 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                         error={errors?.aboutMe}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        values={values}
                     />
                 </div>
                 <div className={basicDetailsStyles.location}>
                     <div>
-                        <Input
-                            id="mapWithLocation"
-                            label="Listing Name"
-                            name="mapWithLocation"
-                            type="text"
-                            background="white"
-                            placeholder="Map with location pin"
-                            autoComplete="off"
-                            error={errors?.mapWithLocation}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
+                        <GroupSelect
+                            id="contactMethods"
+                            name="contactMethods"
+                            label="Contact Methods"
+                            options={contactMethods}
+                            error={errors?.contactMethods}
+                            values={values}
                         />
                     </div>
                     <div>
                         <Input
                             id="locationCountry"
-                            label="Location Country"
                             name="locationCountry"
+                            label="Location Country"
                             type="text"
                             background="white"
                             placeholder="Add Country"
@@ -126,6 +119,7 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                             error={errors?.locationCountry}
                             onChange={handleChange}
                             onBlur={handleBlur}
+                            values={values}
                         />
                         <Input
                             id="locationCity"
@@ -138,6 +132,7 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                             error={errors?.locationCity}
                             onChange={handleChange}
                             onBlur={handleBlur}
+                            values={values}
                         />
                     </div>
                 </div>
