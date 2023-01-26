@@ -47,12 +47,12 @@
     cursor: pointer;
 }
 
-.label {
+.thumbnailInputLabel {
     background: var(--color-grey);
     color: white;
 }
 
-.input {
+.thumbnailInput {
     background: none;
     color: transparent;
     height: 280px;
@@ -73,18 +73,18 @@
     z-index: 20;
 }
 
-.input::placeholder {
+.thumbnailInput::placeholder {
     opacity: 0;
     transition: opacity 0.25s;
     padding-left: 0.3rem;
     font-weight: 500;
 }
 
-.input:focus {
+.thumbnailInput:focus {
     outline: none;
 }
 
-.input:focus::placeholder {
+.thumbnailInput:focus::placeholder {
     opacity: 0.7;
     color: var(--color-grey-50);
 }

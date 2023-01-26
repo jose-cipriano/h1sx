@@ -71,6 +71,7 @@ export default function Accounts() {
                                         error={touched.email && errors?.email}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
+                                        values={values}
                                         required
                                     />
                                     <Input
@@ -84,6 +85,7 @@ export default function Accounts() {
                                         error={touched.password && errors?.password}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
+                                        values={values}
                                         required
                                     />
                                     <Select
@@ -107,6 +109,7 @@ export default function Accounts() {
                                         error={touched.name && errors?.name}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
+                                        values={values}
                                         required
                                     />
                                     <Input
@@ -119,6 +122,7 @@ export default function Accounts() {
                                         error={touched.surname && errors?.surname}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
+                                        values={values}
                                         required
                                     />
                                     <Input
@@ -132,6 +136,7 @@ export default function Accounts() {
                                         autoComplete="off"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
+                                        values={values}
                                         required
                                     />
                                 </div>
@@ -146,6 +151,7 @@ export default function Accounts() {
                                         error={touched.consent && errors?.consent}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
+                                        values={values}
                                         required
                                     />
                                     <Select
@@ -171,6 +177,7 @@ export default function Accounts() {
                                         }
                                         onChange={handleChange}
                                         onBlur={handleBlur}
+                                        values={values}
                                         disabled={values?.role === 'agency'}
                                         required={values?.role === 'agency' ? true : false}
                                     />

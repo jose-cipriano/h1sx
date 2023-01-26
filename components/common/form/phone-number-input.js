@@ -13,16 +13,26 @@ const PhoneNumberInput = ({
     onChange,
     onBlur,
     setFieldValue,
+    values,
     ...props
 }) => {
-    let fieldSetErrStyle, legendErrStyle
+    let fieldSetStyle, legendStyle
 
     if (!!error) {
-        fieldSetErrStyle = {
+        fieldSetStyle = {
             border: '1px solid var(--color-red)',
         }
-        legendErrStyle = {
+        legendStyle = {
             color: 'var(--color-red)',
+        }
+    } else {
+        if (values[name]) {
+            fieldSetStyle = {
+                border: '1px solid var(--color-green)',
+            }
+            legendStyle = {
+                color: 'var(--color-green)',
+            }
         }
     }
 
@@ -37,7 +47,7 @@ const PhoneNumberInput = ({
 
     return (
         <div className={styles.container}>
-            <fieldset className={styles.fieldset} style={fieldSetErrStyle}>
+            <fieldset className={styles.fieldset} style={fieldSetStyle}>
                 <legend
                     className={styles.phoneInputLegend}
                     style={{
@@ -46,7 +56,7 @@ const PhoneNumberInput = ({
                         fontSize: '0.96rem',
                         textTransform: 'initial',
                         fontWeight: 'initial',
-                        ...legendErrStyle,
+                        ...legendStyle,
                     }}
                 >
                     Phone number

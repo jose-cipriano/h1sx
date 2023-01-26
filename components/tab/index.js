@@ -10,7 +10,7 @@ export const ActionTab = ({ initialValues, validationSchema, onSubmit, name, lab
             validationSchema={validationSchema}
             onSubmit={onSubmit}
         >
-            {({ touched, errors, handleBlur, handleChange }) => {
+            {({ touched, errors, handleBlur, handleChange, values }) => {
                 return (
                     <Form className={Tabstyles.form}>
                         <Input
@@ -24,6 +24,7 @@ export const ActionTab = ({ initialValues, validationSchema, onSubmit, name, lab
                             error={touched[name] && errors?.[name]}
                             onChange={handleChange}
                             onBlur={handleBlur}
+                            values={values}
                             required
                         />
                         <div className={Tabstyles.crFormCta}>
