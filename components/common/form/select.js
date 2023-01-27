@@ -2,32 +2,30 @@ import React from 'react'
 import { Field } from 'formik'
 import styles from './select.module.css'
 
-const Select = ({
-    label,
-    border,
-    id,
-    error,
-    background,
-    handleError,
-    onChange,
-    onBlur,
-    options,
-    name,
-    ...props
-}) => {
-    let fieldSetErrStyle, legendErrStyle
+const Select = ({ id, label, name, error, options, values, ...props }) => {
+    let fieldSetStyle, legendStyle
 
     if (!!error) {
-        fieldSetErrStyle = {
+        fieldSetStyle = {
             border: '1px solid var(--color-red)',
         }
-        legendErrStyle = {
+        legendStyle = {
             color: 'var(--color-red)',
         }
+    } else {
+        if (values[name]) {
+            fieldSetStyle = {
+                border: '1px solid var(--color-green)',
+            }
+            legendStyle = {
+                color: 'var(--color-green)',
+            }
+        }
     }
+
     return (
-        <div className={styles.container}>
-            <fieldset className={styles.fieldset} {...props}>
+        <div className={styles.container} {...props}>
+            <fieldset className={styles.fieldset} style={fieldSetStyle}>
                 <legend
                     style={{
                         marginLeft: '4px',
@@ -35,7 +33,7 @@ const Select = ({
                         fontSize: '0.96rem',
                         textTransform: 'initial',
                         fontWeight: 'initial',
-                        ...legendErrStyle,
+                        ...legendStyle,
                     }}
                     className={styles.optionSelectLegend}
                 >

@@ -35,72 +35,92 @@ export default function Location() {
             default:
                 break
         }
-        await fetchJson(apiEndpoint, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        }).then((res) => {
+        try {
+            const res = await fetchJson(apiEndpoint, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            })
             if (res.success) {
                 setRecords(res.data)
-                setLoading(false)
             } else {
                 toast(res.message)
-                setLoading(false)
                 return []
             }
-        })
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        } finally {
+            setLoading(false)
+        }
     }
 
     const addCountry = async ({ country }) => {
         setStatus('pending')
-        await fetchJson(API_ENDPOINTS.COUNTRY, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ country }),
-        }).then((res) => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.COUNTRY, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ country }),
+            })
             toast(res.message)
-            setStatus('resolve')
             getRecords(1)
-            return
-        })
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        } finally {
+            setStatus('resolve')
+        }
     }
     const addCity = async ({ city }) => {
         setStatus('pending')
-        await fetchJson(API_ENDPOINTS.CITY, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ city }),
-        }).then((res) => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.CITY, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ city }),
+            })
             toast(res.message)
-            setStatus('resolve')
             getRecords(2)
-            return
-        })
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        } finally {
+            setStatus('resolve')
+        }
     }
     const addArea = async ({ area }) => {
         setStatus('pending')
-        await fetchJson(API_ENDPOINTS.AREA, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ area }),
-        }).then((res) => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.AREA, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ area }),
+            })
             toast(res.message)
-            setStatus('resolve')
             getRecords(3)
-            return
-        })
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        } finally {
+            setStatus('resolve')
+        }
     }
     const addStreet = async ({ street }) => {
         setStatus('pending')
-        await fetchJson(API_ENDPOINTS.STREET, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ street }),
-        }).then((res) => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.STREET, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ street }),
+            })
             toast(res.message)
-            setStatus('resolve')
             getRecords(4)
-            return
-        })
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        } finally {
+            setStatus('resolve')
+        }
     }
 
     const handleDelete = async (id) => {
@@ -121,16 +141,18 @@ export default function Location() {
             default:
                 break
         }
-
-        await fetchJson(apiEndpoint, {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id }),
-        }).then((res) => {
+        try {
+            const res = await fetchJson(apiEndpoint, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id }),
+            })
             toast(res.message)
             getRecords(toggleState)
-            return
-        })
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        }
     }
 
     const handleEdit = async ({ name }, recordId) => {
@@ -151,16 +173,18 @@ export default function Location() {
             default:
                 break
         }
-
-        await fetchJson(apiEndpoint, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, recordId }),
-        }).then((res) => {
+        try {
+            const res = await fetchJson(apiEndpoint, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, recordId }),
+            })
             toast(res.message)
             getRecords(toggleState)
-            return
-        })
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        }
     }
 
     useEffect(() => {

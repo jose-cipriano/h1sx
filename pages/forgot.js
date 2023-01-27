@@ -16,20 +16,24 @@ const ForgotPass = () => {
     const [err, setErr] = useState(null)
     const handleForgot = async ({ username }) => {
         setStatus('pending')
-        await fetchJson(API_ENDPOINTS.FORGOT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username }),
-        }).then((res) => {
+        try {
+            await fetchJson(API_ENDPOINTS.FORGOT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username }),
+            })
             if (!res.success) {
                 toast(res.message)
                 setErr(res.message)
-                setStatus('resolve')
             } else {
-                setStatus('resolve')
                 toast(`Reset Password Link has been Sent to ${username}`)
             }
-        })
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        } finally {
+            setStatus('resolve')
+        }
     }
 
     return (

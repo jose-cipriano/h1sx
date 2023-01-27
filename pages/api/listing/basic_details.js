@@ -18,8 +18,19 @@ async function handler(req, res) {
                     contactMethods,
                     locationCountry,
                     locationCity,
-                } = req.body
+                } = JSON.parse(req.body)
 
+                // console.log(
+                //     listingName,
+                //     age,
+                //     gender,
+                //     code,
+                //     listingPicture,
+                //     aboutMe,
+                //     contactMethods,
+                //     locationCountry,
+                //     locationCity,
+                // )
                 try {
                     const oneUser = await Listing.find({ listingName: listingName })
                     if (oneUser.length) {
@@ -35,13 +46,12 @@ async function handler(req, res) {
                                 age,
                                 gender,
                                 code,
-                                listingPicture,
+                                listingPicture: listingPicture.data_url,
                                 aboutMe,
                                 contactMethods,
                                 locationCountry,
                                 locationCity,
                             })
-                            console.log(savedListing)
                             res.status(200).json({
                                 success: true,
                                 message: 'Add listing Successfully',

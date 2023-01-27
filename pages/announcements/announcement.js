@@ -17,57 +17,71 @@ export default function Announcement() {
     const { setAnnouncement } = useAnnouncement()
     const addAnnouncement = async ({ announcement }) => {
         setStatus('pending')
-        await fetchJson(API_ENDPOINTS.ANNOUNCEMENT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ announcement }),
-        }).then((res) => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.ANNOUNCEMENT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ announcement }),
+            })
             toast(res.message)
-            setStatus('resolve')
             getRecords()
-            return
-        })
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        } finally {
+            setStatus('resolve')
+        }
     }
 
     const getRecords = async () => {
         setLoading(true)
-        await fetchJson(API_ENDPOINTS.ANNOUNCEMENT, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        }).then((res) => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.ANNOUNCEMENT, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            })
             if (res.success) {
                 setRecords(res.data)
-                setLoading(false)
             } else {
                 toast(res.message)
-                setLoading(false)
                 return []
             }
-        })
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        } finally {
+            setLoading(false)
+        }
     }
 
     const deleteAnnouncement = async (id) => {
-        await fetchJson(API_ENDPOINTS.ANNOUNCEMENT, {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id }),
-        }).then((res) => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.ANNOUNCEMENT, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id }),
+            })
             toast(res.message)
             getRecords()
-            return
-        })
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        }
     }
 
     const editAnnouncement = async ({ name }, recordId) => {
-        await fetchJson(API_ENDPOINTS.ANNOUNCEMENT, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, recordId }),
-        }).then((res) => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.ANNOUNCEMENT, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, recordId }),
+            })
             toast(res.message)
             getRecords()
-            return
-        })
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        }
     }
 
     useEffect(() => {

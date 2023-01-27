@@ -16,57 +16,73 @@ export default function Service() {
 
     const addService = async ({ service }) => {
         setStatus('pending')
-        await fetchJson(API_ENDPOINTS.SERVICE, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ service }),
-        }).then((res) => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.SERVICE, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ service }),
+            })
             toast(res.message)
-            setStatus('resolve')
             getRecords()
-            return
-        })
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        } finally {
+            setStatus('resolve')
+        }
     }
 
     const getRecords = async () => {
         setLoading(true)
-        await fetchJson(API_ENDPOINTS.SERVICE, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        }).then((res) => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.SERVICE, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            })
             if (res.success) {
                 setRecords(res.data)
-                setLoading(false)
             } else {
                 toast(res.message)
-                setLoading(false)
                 return []
             }
-        })
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        } finally {
+            setLoading(false)
+        }
     }
 
     const deleteService = async (id) => {
-        await fetchJson(API_ENDPOINTS.SERVICE, {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id }),
-        }).then((res) => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.SERVICE, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id }),
+            })
             toast(res.message)
             getRecords()
             return
-        })
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        }
     }
 
     const editService = async ({ name }, recordId) => {
-        await fetchJson(API_ENDPOINTS.SERVICE, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, recordId }),
-        }).then((res) => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.SERVICE, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, recordId }),
+            })
             toast(res.message)
             getRecords()
             return
-        })
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        }
     }
 
     useEffect(() => {

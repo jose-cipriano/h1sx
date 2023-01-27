@@ -2,7 +2,7 @@ import { Field } from 'formik'
 import React from 'react'
 import styles from './group-select.module.css'
 
-const GroupSelect = ({ label, id, error, onBlur, options, values, name, ...props }) => {
+const GroupSelect = ({ label, id, error, options, values, name, ...props }) => {
     let fieldSetStyle, legendStyle, badgeErrStyle
 
     if (!!error) {
@@ -17,7 +17,7 @@ const GroupSelect = ({ label, id, error, onBlur, options, values, name, ...props
             color: 'var(--color-red)',
         }
     } else {
-        if (values[name].length) {
+        if (values[name]?.length) {
             fieldSetStyle = {
                 border: '1px solid var(--color-green)',
             }

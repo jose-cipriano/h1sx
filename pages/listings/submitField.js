@@ -12,18 +12,21 @@ const SubmitField = ({ disabled }) => {
     const { values } = useFormikContext()
     const handleCreateList = async () => {
         setStatus('pending')
-        await fetchJson(API_ENDPOINTS.LISTING, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                values,
-            }),
-        }).then((res) => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.LISTING, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    values,
+                }),
+            })
             toast(res.message)
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        } finally {
             setStatus('resolve')
-            return
-        })
-        setStatus('resolve')
+        }
     }
 
     return (

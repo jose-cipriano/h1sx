@@ -27,26 +27,29 @@ export default function Accounts() {
         birthday,
     }) => {
         setStatus('pending')
-        await fetchJson(API_ENDPOINTS.ACCOUNT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email,
-                password,
-                role,
-                name,
-                surname,
-                limit,
-                consent,
-                accountStatus,
-                birthday,
-            }),
-        }).then((res) => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.ACCOUNT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email,
+                    password,
+                    role,
+                    name,
+                    surname,
+                    limit,
+                    consent,
+                    accountStatus,
+                    birthday,
+                }),
+            })
             toast(res.message)
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        } finally {
             setStatus('resolve')
-            return
-        })
-        setStatus('resolve')
+        }
     }
 
     return (

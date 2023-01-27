@@ -7,24 +7,26 @@ import fetchJson from '../../lib/fetchJson'
 import { API_ENDPOINTS } from '../../utils/api-endpoints'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
-import { useEffect, useState } from 'react'
 import { useAnnouncement } from '../../contexts/announcement'
 import Spinner from '../common/spinner'
 
 const Header = () => {
     const router = useRouter()
     const { mutate: mutateUser } = useSWR('/api/user')
-    // const [announcement, setAnnouncement] = useState('LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT.')
     const { announcement, isLoading } = useAnnouncement()
     const handleLogout = async () => {
-        mutateUser(
-            await fetchJson(API_ENDPOINTS.LOGOUT, {
-                method: 'POST',
-            }),
-            false,
-        )
-        router.push('/')
-        window.location.reload()
+        try {
+            mutateUser(
+                await fetchJson(API_ENDPOINTS.LOGOUT, {
+                    method: 'POST',
+                }),
+                false,
+            )
+            router.push('/')
+            window.location.reload()
+        } catch (e) {
+            console.log(e)
+        }
     }
     return (
         <>

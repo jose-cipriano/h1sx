@@ -24,32 +24,28 @@ export default function Home() {
         setPwdErr(null)
         setStatus('pending')
         try {
-            mutateUser(
-                await fetchJson(API_ENDPOINTS.LOGIN, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, password }),
-                }).then((res) => {
-                    if (!res.success) {
-                        if (res.message === 'Invalid Password') {
-                            setPwdErr(res.message)
-                            setUsernameErr(null)
-                            toast(res.message)
-                            setStatus('resolve')
-                            return
-                        }
-                        toast(res.message)
-                        setUsernameErr(res.message)
-                        setStatus('resolve')
-                    } else {
-                        setStatus('resolve')
-                        window.location.reload()
-                    }
-                }),
-            )
-            setStatus('resolve')
+            const res = await fetchJson(API_ENDPOINTS.LOGIN, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password }),
+            })
+            if (!res.success) {
+                if (res.message === 'Invalid Password') {
+                    setPwdErr(res.message)
+                    setUsernameErr(null)
+                    toast(res.message)
+                    return
+                }
+                toast(res.message)
+                setUsernameErr(res.message)
+            } else {
+                window.location.reload()
+            }
+            mutateUser()
         } catch (err) {
             console.log(err)
+            toast(err.message)
+        } finally {
             setStatus('resolve')
         }
     }
