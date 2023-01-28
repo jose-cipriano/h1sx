@@ -1,231 +1,191 @@
 import Input from '../../components/common/form/input'
 import characteristicsStyles from './characteristics.module.css'
+import Select from '../../components/common/form/select'
+import SingleSelect from '../../components/common/form/single-select'
+import GroupSelect from '../../components/common/form/group-select'
 
-const CharacteristicsForm = ({ touched, errors, handleChange, handleBlur }) => {
+const CharacteristicsForm = ({ touched, errors, handleChange, values }) => {
+    const nationalities = ['Hungarian', 'Hispanic', 'Asian']
+    const languages = ['Hungarian', 'English']
+    const orientations = ['Hetereosexual', 'Bisexual', 'Homosexual']
+    const imeets = ['Males', 'Females', 'Transgender', 'Couples']
+    const availabilities = ['Incall', 'Outcall Hotel', 'Outcall Residence']
+    const heights = new Array(111).fill().map((item, index) => 140 + index)
+    const weights = new Array(161).fill().map((item, index) => 40 + index)
+    const cupSizes = ['A', 'B', 'C', 'D', 'DD', 'E+']
+    const bTypes = ['Natural', 'Silicon']
+    const pLengths = new Array(18).fill().map((item, index) => 11 + index)
+    const pGirths = new Array(13).fill().map((item, index) => 8 + index)
+    const hColors = ['Black', 'Blonde', 'Brown', 'Red', 'Other']
+    const eColors = ['Amber', 'Blue', 'Brown', 'Green', 'Grey']
+    const iHairs = ['Shaved', 'Trimmed', 'Natural']
+    const bodyArts = ['Piercing', 'Tattoo']
+    const smokings = ['Yes', 'Occasionally', 'No']
+    const drinkings = ['Yes', 'Occasionally', 'No']
+    const parties = ['Yes', 'No']
+
+    console.log(values)
     return (
         <>
             <div className={characteristicsStyles.info_1}>
-                <Input
+                <Select
                     id="nationality"
                     label="Nationality"
                     name="nationality"
-                    type="text"
-                    background="white"
-                    placeholder="Nationality"
-                    autoComplete="off"
+                    options={nationalities}
                     error={errors.nationality}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    values={values}
                 />
-                <Input
+                <Select
                     id="i_speak"
                     label="I Speak"
                     name="i_speak"
-                    type="text"
-                    background="white"
-                    placeholder="I Speak"
-                    autoComplete="off"
+                    options={languages}
                     error={errors.i_speak}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    values={values}
                 />
-                <Input
+                <SingleSelect
                     id="orientation"
                     label="Orientation"
                     name="orientation"
-                    type="text"
-                    background="white"
-                    placeholder="Orientation"
-                    autoComplete="off"
+                    options={orientations}
                     error={errors.orientation}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    values={values}
+                    touched={touched}
                 />
-                <Input
+                <GroupSelect
                     id="i_meet"
-                    label="I Meet"
                     name="i_meet"
-                    type="text"
-                    background="white"
-                    placeholder="I Meet"
-                    autoComplete="off"
+                    label="I Meet"
+                    options={imeets}
                     error={errors.i_meet}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    values={values}
                 />
-                <Input
+                <GroupSelect
                     id="available_for"
                     label="Available For"
                     name="available_for"
-                    type="text"
-                    background="white"
-                    placeholder="Available For"
-                    autoComplete="off"
+                    options={availabilities}
                     error={errors.available_for}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    values={values}
                 />
             </div>
             <div className={characteristicsStyles.info_2}>
-                <Input
+                <Select
                     id="height"
-                    label="Height"
+                    label="Height (cm)"
                     name="height"
-                    type="text"
-                    background="white"
-                    placeholder="Height"
-                    autoComplete="off"
                     error={errors.height}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    options={heights}
+                    values={values}
                 />
-                <Input
+                <Select
                     id="weight"
                     label="Weight"
                     name="weight"
-                    type="text"
-                    background="white"
-                    placeholder="Weight"
-                    autoComplete="off"
                     error={errors.weight}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    options={weights}
+                    values={values}
                 />
-                <Input
+                <SingleSelect
                     id="cup_size"
                     label="Cup Size"
                     name="cup_size"
-                    type="text"
-                    background="white"
-                    placeholder="Cup Size"
-                    autoComplete="off"
                     error={errors.cup_size}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    options={cupSizes}
+                    values={values}
+                    touched={touched}
                 />
-                <Input
+                <SingleSelect
                     id="breast_type"
                     label="Breast Type"
                     name="breast_type"
-                    type="text"
-                    background="white"
-                    placeholder="Breast Type"
-                    autoComplete="off"
                     error={errors.breast_type}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    options={bTypes}
+                    values={values}
+                    touched={touched}
                 />
-                <Input
+                <Select
                     id="penis_length"
-                    label="Penis Length"
+                    label="Penis Length (cm)"
                     name="penis_length"
-                    type="text"
-                    background="white"
-                    placeholder="Penis Length"
-                    autoComplete="off"
                     error={errors.penis_length}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    options={pLengths}
+                    values={values}
                 />
-                <Input
+                <Select
                     id="penis_girth"
-                    label="Penis Girth"
+                    label="Penis Girth (cm)"
                     name="penis_girth"
-                    type="text"
-                    background="white"
-                    placeholder="Penis Girth"
-                    autoComplete="off"
                     error={errors.penis_girth}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    options={pGirths}
+                    values={values}
                 />
             </div>
             <div className={characteristicsStyles.info_3}>
-                <Input
+                <SingleSelect
                     id="hair_color"
                     label="Hair Color"
                     name="hair_color"
-                    type="text"
-                    background="white"
-                    placeholder="Hair Color"
-                    autoComplete="off"
                     error={errors.hair_color}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    options={hColors}
+                    values={values}
+                    touched={touched}
                 />
-                <Input
+                <SingleSelect
                     id="eye_color"
                     label="Eye Color"
                     name="eye_color"
-                    type="text"
-                    background="white"
-                    placeholder="Eye Color"
-                    autoComplete="off"
                     error={errors.eye_color}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    options={eColors}
+                    values={values}
+                    touched={touched}
                 />
-                <Input
+                <SingleSelect
                     id="intimate_hair"
                     label="Weight"
                     name="intimate_hair"
-                    type="text"
-                    background="white"
-                    placeholder="Weight"
-                    autoComplete="off"
                     error={errors.intimate_hair}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    options={iHairs}
+                    values={values}
+                    touched={touched}
                 />
-                <Input
+                <GroupSelect
                     id="bodyart"
                     label="Bodyart"
                     name="bodyart"
-                    type="text"
-                    background="white"
-                    placeholder="Bodyart"
-                    autoComplete="off"
                     error={errors.bodyart}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    options={bodyArts}
+                    values={values}
                 />
             </div>
             <div className={characteristicsStyles.info_4}>
-                <Input
+                <SingleSelect
                     id="smoking"
                     label="Smoking"
                     name="smoking"
-                    type="text"
-                    background="white"
-                    placeholder="Smoking"
-                    autoComplete="off"
                     error={errors.smoking}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    options={smokings}
+                    values={values}
+                    touched={touched}
                 />
-                <Input
+                <SingleSelect
                     id="drinking"
                     label="Drinking"
                     name="drinking"
-                    type="text"
-                    background="white"
-                    placeholder="Drinking"
-                    autoComplete="off"
                     error={errors.drinking}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    options={drinkings}
+                    values={values}
+                    touched={touched}
                 />
-                <Input
+                <SingleSelect
                     id="party_play"
                     label="Party & Play"
                     name="party_play"
-                    type="text"
-                    background="white"
-                    placeholder="Party & Play"
-                    autoComplete="off"
                     error={errors.party_play}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    options={parties}
+                    values={values}
+                    touched={touched}
                 />
             </div>
         </>

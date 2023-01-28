@@ -28,16 +28,19 @@ export default function ResetPassword() {
             return
         }
         setStatus('pending')
-
-        await fetchJson(API_ENDPOINTS.RESET, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ password, username }),
-        }).then((res) => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.RESET, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password, username }),
+            })
             toast(res.message)
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        } finally {
             setStatus('resolve')
-            return
-        })
+        }
     }
     useEffect(() => {
         if (token) {

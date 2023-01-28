@@ -1,32 +1,35 @@
 import * as React from 'react'
 import { API_ENDPOINTS } from '../utils/api-endpoints'
 import fetchJson from '../lib/fetchJson'
-
+import { toast } from 'react-toastify'
 const AnnouncementContext = React.createContext()
 
 function AnnouncementProvider(props) {
     const [isLoading, setIsLoading] = React.useState(false)
-    const [announcement, setAnnouncement] = React.useState(
-        'LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT.',
-    )
+    const [announcement, setAnnouncement] = React.useState('Hello there.')
 
     const getAnnouncement = React.useCallback(async () => {
         setIsLoading(true)
-        await fetchJson(API_ENDPOINTS.ANNOUNCEMENT, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        }).then((res) => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.ANNOUNCEMENT, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            })
             if (res.success) {
                 const resData = res.data
                 const activeAnnouncement = resData.find((item) => item.active)
                 setAnnouncement(activeAnnouncement.name)
-                setIsLoading(false)
             } else {
                 toast(res.message)
-                setIsLoading(false)
+                setAnnouncement('Hello there.')
                 return []
             }
-        })
+        } catch (err) {
+            toast('Something went wrong on the server.')
+            return []
+        } finally {
+            setIsLoading(false)
+        }
     }, [])
 
     const value = React.useMemo(

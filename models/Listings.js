@@ -37,7 +37,10 @@ const ListingSchema = new Schema({
         // required: true,
     },
     contactMethods: [String],
-    // listingPicture: {},
+    listingPicture: {
+        type: String,
+        required: true,
+    },
     nationality: {
         type: String,
         // required: true,

@@ -2,18 +2,7 @@ import { Field } from 'formik'
 import React from 'react'
 import styles from './single-select.module.css'
 
-const SingleSelect = ({
-    label,
-    id,
-    error,
-    onBlur,
-    options,
-    upTo,
-    values,
-    name,
-    touched,
-    ...props
-}) => {
+const SingleSelect = ({ label, id, error, options, values, name, touched, ...props }) => {
     let fieldSetStyle, legendStyle, badgeStyle
 
     if (!!error) {
@@ -28,7 +17,7 @@ const SingleSelect = ({
             color: 'var(--color-red)',
         }
     } else {
-        if (values[name].length) {
+        if (values[name]?.length) {
             fieldSetStyle = {
                 border: '1px solid var(--color-green)',
             }

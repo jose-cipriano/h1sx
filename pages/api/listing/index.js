@@ -9,7 +9,6 @@ async function handler(req, res) {
         switch (method) {
             case 'POST':
                 const { values } = req.body
-                console.log(values)
                 // console.log(
                 //     'listingName, age, gender, code, aboutMe, locationCountry, locationCity, mapWithLocation,contactMethods,  nationality, i_speak, orientation, i_meet,available_for, height,weight,cup_size, breast_type, penis_length, penis_girth,hair_color, eye_color, intimate_hair,bodyart,smoking, drinking, party_play ===>',
                 //     listingName,

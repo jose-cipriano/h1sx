@@ -44,43 +44,51 @@ export default function Listings() {
         locationCity,
     }) => {
         setStatus('pending')
-        await fetchJson(API_ENDPOINTS.LISTING, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                listingName,
-                age,
-                gender,
-                code,
-                listingPicture,
-                aboutMe,
-                contactMethods,
-                locationCountry,
-                locationCity,
-            }),
-        }).then((res) => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.LISTING, {
+                method: 'POST',
+                headers: { 'Content-Type': 'multipart/form-data' },
+                body: JSON.stringify({
+                    listingName,
+                    age,
+                    gender,
+                    code,
+                    listingPicture,
+                    aboutMe,
+                    contactMethods,
+                    locationCountry,
+                    locationCity,
+                }),
+            })
+
             toast(res.message)
             setStatus('resolve')
-            return
-        })
-        setStatus('resolve')
+            return res
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        }
     }
 
-    const handleNextForm = (values) => {
+    const handleNextForm = async (values) => {
         switch (activeStep) {
             case 0:
-                createListingBasicDetails(values).then((res) => {
-                    console.log('res===>', res)
-                })
+                try {
+                    const res = await createListingBasicDetails(values)
+                    if (res.success) {
+                        console.log('success', res.data)
+                    } else {
+                        console.log('failed')
+                    }
+                    setActiveStep(1)
+                } catch (err) {
+                    console.log('err', err)
+                }
                 break
 
             default:
                 break
         }
-        createListing(values)
-        // if (!isLastStep) {
-        //     setActiveStep((prev) => prev + 1)
-        // }
     }
 
     function _renderStepContent({
@@ -111,6 +119,7 @@ export default function Listings() {
                         errors={errors}
                         handleBlur={handleBlur}
                         handleChange={handleChange}
+                        values={values}
                     />
                 )
             case 2:
@@ -160,10 +169,12 @@ export default function Listings() {
                     </div>
                     <Formik
                         initialValues={{
-                            age: 18,
+                            age: 21,
                             gender: '',
                             listingPicture: null,
                             contactMethods: [],
+                            locationCountry: 'Cyprus',
+                            locationCity: 'Limassol',
                         }}
                         validationSchema={listingSchema[activeStep]}
                         onSubmit={handleNextForm}

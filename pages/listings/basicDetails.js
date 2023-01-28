@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Input from '../../components/common/form/input'
 import ImageInput from '../../components/common/form/image-input'
 import TextArea from '../../components/common/form/text-area'
@@ -5,10 +6,50 @@ import PhoneNumberInput from '../../components/common/form/phone-number-input'
 import SingleSelect from '../../components/common/form/single-select'
 import basicDetailsStyles from './basicDetails.module.css'
 import GroupSelect from '../../components/common/form/group-select'
+import Select from '../../components/common/form/select'
+import { API_ENDPOINTS } from '../../utils/api-endpoints'
+import fetchJson from '../../lib/fetchJson'
+import { toast } from 'react-toastify'
 
 const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, values, touched }) => {
     const contactMethods = ['Call', 'SMS', 'WhatsApp', 'Viber', 'Telegram']
     const genders = ['Female', 'Transgender', 'Male']
+    const ages = new Array(50).fill().map((item, index) => 21 + index)
+    const [countries, setCountries] = useState([])
+    const [cities, setCities] = useState([])
+    const getCountries = async () => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.COUNTRY, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            })
+            const resCountries = res.data.map((c) => c.name)
+            setCountries(resCountries)
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        }
+    }
+
+    const getCities = async () => {
+        try {
+            const res = await fetchJson(API_ENDPOINTS.CITY, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            })
+            const resCities = res.data.map((c) => c.name)
+            setCities(resCities)
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        }
+    }
+
+    useEffect(() => {
+        getCountries()
+        getCities()
+    }, [])
+
     return (
         <>
             <div className={basicDetailsStyles.info_1}>
@@ -26,18 +67,13 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                         onChange={handleChange}
                         onBlur={handleBlur}
                     />
-                    <Input
+                    <Select
                         id="age"
                         name="age"
                         label="Age"
-                        type="number"
-                        defaultValue={18}
-                        background="white"
-                        placeholder="Add Age"
-                        autoComplete="off"
+                        defaultValue={21}
+                        options={ages}
                         error={errors.age}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
                         values={values}
                     />
                     <SingleSelect
@@ -45,8 +81,6 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                         name="gender"
                         label="Gender"
                         error={errors.gender}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
                         touched={touched}
                         options={genders}
                         values={values}
@@ -55,9 +89,6 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                         id="code"
                         setFieldValue={setFieldValue}
                         name="code"
-                        type="string"
-                        background="white"
-                        autoComplete="off"
                         error={errors?.code}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -69,8 +100,6 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                         id="listingPicture"
                         label="Listing Picture"
                         name="listingPicture"
-                        background="white"
-                        autoComplete="off"
                         error={errors?.listingPicture}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -87,9 +116,6 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                         label="About Me"
                         name="aboutMe"
                         type="text"
-                        background="white"
-                        placeholder="About Me"
-                        autoComplete="off"
                         error={errors?.aboutMe}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -108,30 +134,22 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                         />
                     </div>
                     <div>
-                        <Input
+                        <Select
                             id="locationCountry"
-                            name="locationCountry"
                             label="Location Country"
-                            type="text"
-                            background="white"
-                            placeholder="Add Country"
-                            autoComplete="off"
+                            name="locationCountry"
+                            options={countries}
+                            defaultValue="Cyprus"
                             error={errors?.locationCountry}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
                             values={values}
                         />
-                        <Input
+                        <Select
                             id="locationCity"
                             label="Location City"
                             name="locationCity"
-                            type="text"
-                            background="white"
-                            placeholder="Add City/District"
-                            autoComplete="off"
+                            options={cities}
+                            defaultValue="Limassol"
                             error={errors?.locationCity}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
                             values={values}
                         />
                     </div>
