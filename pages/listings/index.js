@@ -29,6 +29,7 @@ const steps = [
 export default function Listings() {
     const [status, setStatus] = useState('idle')
     const [activeStep, setActiveStep] = useState(0)
+    const [listingId, setListingId] = useState('')
     const isLastStep = activeStep === steps.length - 1
     const isFirstStep = activeStep === 0
 
@@ -45,7 +46,7 @@ export default function Listings() {
     }) => {
         setStatus('pending')
         try {
-            const res = await fetchJson(API_ENDPOINTS.LISTING, {
+            const res = await fetchJson(API_ENDPOINTS.BASICDETAILS, {
                 method: 'POST',
                 headers: { 'Content-Type': 'multipart/form-data' },
                 body: JSON.stringify({
@@ -70,22 +71,96 @@ export default function Listings() {
         }
     }
 
+    const createCharacteristics = async ({
+        nationality,
+        i_speak,
+        orientation,
+        i_meet,
+        available_for,
+        height,
+        weight,
+        cup_size,
+        b_type,
+        p_length,
+        p_girth,
+        hair_color,
+        eye_color,
+        intimate_hair,
+        bodyart,
+        smoking,
+        drinking,
+        party_play,
+    }) => {
+        setStatus('pending')
+        try {
+            const res = await fetchJson(API_ENDPOINTS.CHARACTERISTICS, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    nationality,
+                    i_speak,
+                    orientation,
+                    i_meet,
+                    available_for,
+                    height,
+                    weight,
+                    cup_size,
+                    b_type,
+                    p_length,
+                    p_girth,
+                    hair_color,
+                    eye_color,
+                    intimate_hair,
+                    bodyart,
+                    smoking,
+                    drinking,
+                    party_play,
+                    listingId,
+                }),
+            })
+
+            toast(res.message)
+            setStatus('resolve')
+            return res
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        }
+    }
+
+    // const createMediaGallery = async ({
+
+    // })
+
     const handleNextForm = async (values) => {
         switch (activeStep) {
             case 0:
                 try {
                     const res = await createListingBasicDetails(values)
                     if (res.success) {
-                        console.log('success', res.data)
+                        console.log(res.data)
+                        setListingId(res.data)
+                        toast(res.message)
+                        setActiveStep(1)
                     } else {
-                        console.log('failed')
+                        console.log('failed step 1')
                     }
-                    setActiveStep(1)
                 } catch (err) {
                     console.log('err', err)
                 }
                 break
-
+            case 1:
+                try {
+                    const res = await createCharacteristics(values, listingId)
+                    if (res.success) {
+                        toast(res.message)
+                        setActiveStep(2)
+                    } else {
+                        console.log('failed step 2')
+                    }
+                } catch (err) {
+                    console.log('err', err)
+                }
             default:
                 break
         }
@@ -125,11 +200,9 @@ export default function Listings() {
             case 2:
                 return (
                     <MediaGalleryForm
-                    // errors={errors}
-                    // handleBlur={handleBlur}
-                    // handleChange={handleChange}
-                    // setFieldValue={setFieldValue}
-                    // values={values}
+                        errors={errors}
+                        setFieldValue={setFieldValue}
+                        values={values}
                     />
                 )
             default:
@@ -169,12 +242,32 @@ export default function Listings() {
                     </div>
                     <Formik
                         initialValues={{
+                            listingName: '',
                             age: 21,
                             gender: '',
                             listingPicture: null,
                             contactMethods: [],
                             locationCountry: 'Cyprus',
                             locationCity: 'Limassol',
+                            thumbnails: null,
+                            // nationality: '',
+                            // i_speak: '',
+                            // orientation: '',
+                            // i_meet: 'Males',
+                            // available_for: 'Incall',
+                            // height: 140,
+                            // weight: 40,
+                            // cup_size: '',
+                            // b_type: '',
+                            // p_length: 11,
+                            // p_girth: 8,
+                            // hair_color: '',
+                            // eye_color: '',
+                            // intimate_hair: '',
+                            // body_art: 'Piercing',
+                            // smoking: '',
+                            // drinking: '',
+                            // party_play: ''
                         }}
                         validationSchema={listingSchema[activeStep]}
                         onSubmit={handleNextForm}

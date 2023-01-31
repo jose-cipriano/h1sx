@@ -61,7 +61,11 @@ async function handler(req, res) {
 
         res.status(200).json({ success: true, email: username })
     } catch (error) {
-        res.status(500).json({ message: error.message })
+        res.status(500).json({
+            success: false,
+            message: "Can't connect the server",
+            data: error.message,
+        })
     }
 }
 

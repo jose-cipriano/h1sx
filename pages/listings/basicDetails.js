@@ -17,13 +17,20 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
     const ages = new Array(50).fill().map((item, index) => 21 + index)
     const [countries, setCountries] = useState([])
     const [cities, setCities] = useState([])
+    const restrictions = [
+        'max. file size is 20mb',
+        'supported files are jpeg, png, webp',
+        'portrait oriented recommended (2:3 ratio)',
+        'new uploads/modifications will be approaved manually - this can take up to 12h',
+        'restrictions: genitals (vagina, penis)',
+    ]
     const getCountries = async () => {
         try {
             const res = await fetchJson(API_ENDPOINTS.COUNTRY, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             })
-            const resCountries = res.data.map((c) => c.name)
+            const resCountries = typeof res.data === 'object' ? res.data.map((c) => c.name) : []
             setCountries(resCountries)
         } catch (err) {
             console.log(err)
@@ -37,7 +44,7 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             })
-            const resCities = res.data.map((c) => c.name)
+            const resCities = typeof res.data === 'object' ? res.data.map((c) => c.name) : []
             setCities(resCities)
         } catch (err) {
             console.log(err)
@@ -101,10 +108,9 @@ const BasicDetailsForm = ({ errors, handleChange, handleBlur, setFieldValue, val
                         label="Listing Picture"
                         name="listingPicture"
                         error={errors?.listingPicture}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
                         setFieldValue={setFieldValue}
                         values={values}
+                        restrictions={restrictions}
                         height="400px"
                     />
                 </div>

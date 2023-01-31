@@ -97,27 +97,27 @@ const CharacteristicsForm = ({ touched, errors, handleChange, values }) => {
                     touched={touched}
                 />
                 <SingleSelect
-                    id="breast_type"
+                    id="b_type"
                     label="Breast Type"
-                    name="breast_type"
-                    error={errors.breast_type}
+                    name="b_type"
+                    error={errors.b_type}
                     options={bTypes}
                     values={values}
                     touched={touched}
                 />
                 <Select
-                    id="penis_length"
+                    id="p_length"
                     label="Penis Length (cm)"
-                    name="penis_length"
-                    error={errors.penis_length}
+                    name="p_length"
+                    error={errors.p_length}
                     options={pLengths}
                     values={values}
                 />
                 <Select
-                    id="penis_girth"
+                    id="p_girth"
                     label="Penis Girth (cm)"
-                    name="penis_girth"
-                    error={errors.penis_girth}
+                    name="p_girth"
+                    error={errors.p_girth}
                     options={pGirths}
                     values={values}
                 />

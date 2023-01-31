@@ -20,20 +20,9 @@ async function handler(req, res) {
                     locationCity,
                 } = JSON.parse(req.body)
 
-                // console.log(
-                //     listingName,
-                //     age,
-                //     gender,
-                //     code,
-                //     listingPicture,
-                //     aboutMe,
-                //     contactMethods,
-                //     locationCountry,
-                //     locationCity,
-                // )
                 try {
-                    const oneUser = await Listing.find({ listingName: listingName })
-                    if (oneUser.length) {
+                    const oneListing = await Listing.find({ listingName: listingName })
+                    if (oneListing.length) {
                         res.status(200).json({
                             success: false,
                             message: 'This listing is already existed.',
@@ -51,10 +40,28 @@ async function handler(req, res) {
                                 contactMethods,
                                 locationCountry,
                                 locationCity,
+                                nationality: '',
+                                i_speak: '',
+                                orientation: '',
+                                i_meet: '',
+                                available_for: '',
+                                height: '',
+                                weight: '',
+                                cup_size: '',
+                                b_type: '',
+                                p_length: '',
+                                p_girth: '',
+                                hair_color: '',
+                                eye_color: '',
+                                intimate_hair: '',
+                                body_art: '',
+                                smoking: '',
+                                drinking: '',
+                                party_play: '',
                             })
                             res.status(200).json({
                                 success: true,
-                                message: 'Add listing Successfully',
+                                message: 'Add basic details Successfully',
                                 data: savedListing[0]._id,
                             })
                             return
@@ -78,7 +85,7 @@ async function handler(req, res) {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: 'Internal ServerError',
+            message: "Can't connect the server",
             data: error.message,
         })
         return

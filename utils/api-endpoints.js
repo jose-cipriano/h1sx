@@ -12,5 +12,7 @@ export const API_ENDPOINTS = {
     SERVICE: '/api/service',
     ANNOUNCEMENT: 'api/announcement',
     ACCOUNT: 'api/accounts',
-    LISTING: 'api/listing/basic_details',
+    BASICDETAILS: 'api/listing/basic_details',
+    CHARACTERISTICS: 'api/listing/characteristics',
+    MEDIAGALLERY: 'api/listing/mediagallery',
 }

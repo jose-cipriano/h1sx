@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import ImageUploading from 'react-images-uploading'
 import styles from './image-input.module.css'
 import { TbTrash, TbPencil } from 'react-icons/tb'
-const ImageInput = ({
+const ThumbnailsInput = ({
     label,
     border,
     id,
@@ -39,12 +39,13 @@ const ImageInput = ({
         }
     }
 
-    const [images, setImages] = useState([])
+    const [images, setImages] = useState([src])
     const onChangeImg = (imageList, addUpdateIndex) => {
         // data for submit
         setImages(imageList)
         setFieldValue(name, imageList[0])
     }
+
     return (
         <div className={styles.container}>
             <fieldset
@@ -95,14 +96,15 @@ const ImageInput = ({
                             </ul>
                             {imageList.map((image, idx) => (
                                 <div key={idx} className={styles.imageItem}>
-                                    <Image src={image.data_url} alt="" fill />
+                                    <Image
+                                        src={image.data_url}
+                                        alt=""
+                                        layout="fill"
+                                        objectFit="cover"
+                                    />
                                     <div className={styles.imageItemBtnWrapper}>
-                                        <button onClick={() => onImageRemove(idx)}>
-                                            <TbTrash />
-                                        </button>
-                                        <button onClick={() => onImageUpdate(idx)}>
-                                            <TbPencil />
-                                        </button>
+                                        {/* <button onClick={() => onImageRemove(idx)}><TbTrash/></button>
+                                        <button onClick={() => onImageUpdate(idx)}><TbPencil/></button> */}
                                     </div>
                                 </div>
                             ))}
@@ -118,4 +120,4 @@ const ImageInput = ({
     )
 }
 
-export default ImageInput
+export default ThumbnailsInput
