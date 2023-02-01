@@ -30,7 +30,7 @@ const steps = [
 ]
 export default function Listings() {
     const [status, setStatus] = useState('idle')
-    const [activeStep, setActiveStep] = useState(4)
+    const [activeStep, setActiveStep] = useState(0)
     const [listingId, setListingId] = useState('')
     const isLastStep = activeStep === steps.length - 1
     const isFirstStep = activeStep === 0
