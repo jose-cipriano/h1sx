@@ -13,12 +13,14 @@ const Select = ({ id, label, name, error, options, values, ...props }) => {
             color: 'var(--color-red)',
         }
     } else {
-        if (values[name]) {
-            fieldSetStyle = {
-                border: '1px solid var(--color-green)',
-            }
-            legendStyle = {
-                color: 'var(--color-green)',
+        if (values) {
+            if (values[name]) {
+                fieldSetStyle = {
+                    border: '1px solid var(--color-green)',
+                }
+                legendStyle = {
+                    color: 'var(--color-green)',
+                }
             }
         }
     }

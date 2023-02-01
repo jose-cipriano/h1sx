@@ -1,0 +1,92 @@
+import React from 'react'
+import { Field } from 'formik'
+import styles from './switch-input.module.css'
+import { ToggleSwitch } from './toggle-switch'
+
+const timeStamps = ['20min', '1h', '2h']
+const priceOptions = [15, 25, 50, 100, 125, 150]
+const SwitchInput = ({ id, label, name, error, options, item, toggle, idx, ...props }) => {
+    const onChangeDurationTime = (value, id) => {
+        console.log(value, id)
+        const origin = item.rate[id]
+        item.rate[id] = {
+            ...origin,
+            duration: value,
+        }
+        // setValues(...item)
+    }
+
+    const onChangePriceForTime = (value, id) => {
+        console.log(value, id)
+        const origin = item.rate[id]
+        item.rate[id] = {
+            ...origin,
+            price: value,
+        }
+        // setValues(...item)
+    }
+    return (
+        <div className={styles.container} {...props}>
+            <fieldset className={styles.fieldset}>
+                <legend
+                    style={{
+                        marginLeft: '4px',
+                        color: 'var(--color-grey)',
+                        fontSize: '0.96rem',
+                        textTransform: 'initial',
+                        fontWeight: 'initial',
+                    }}
+                    className={styles.optionSelectLegend}
+                >
+                    {label}
+                </legend>
+                <div className={styles.inputHolder}>
+                    <span>{name}</span>
+                    <ToggleSwitch on={item.availability} onClick={(e) => toggle(e, idx)} />
+                </div>
+            </fieldset>
+            {item.availability &&
+                item.rate.map((rateItem, ind) => {
+                    return (
+                        <div className={styles.availabilityPrice} key={ind}>
+                            <div className={styles.availabilityPriceDuration}>
+                                <label>Duration</label>
+                                <Field
+                                    as="select"
+                                    className={styles.fromInput}
+                                    value={rateItem.duration}
+                                    onChange={(e) => onChangeDurationTime(e.target.value, ind)}
+                                >
+                                    {timeStamps.map((opt) => {
+                                        return (
+                                            <option key={opt} value={opt}>
+                                                {opt}
+                                            </option>
+                                        )
+                                    })}
+                                </Field>
+                            </div>
+                            <div className={styles.availabilityPriceSelect}>
+                                <label>Price</label>
+                                <Field
+                                    as="select"
+                                    className={styles.fromInput}
+                                    value={rateItem.price}
+                                    onChange={(e) => onChangePriceForTime(e.target.value, ind)}
+                                >
+                                    {priceOptions.map((opt) => {
+                                        return (
+                                            <option key={opt} value={opt}>
+                                                {opt}
+                                            </option>
+                                        )
+                                    })}
+                                </Field>
+                            </div>
+                        </div>
+                    )
+                })}
+        </div>
+    )
+}
+export default SwitchInput

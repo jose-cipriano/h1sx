@@ -95,7 +95,12 @@ const ImageInput = ({
                             </ul>
                             {imageList.map((image, idx) => (
                                 <div key={idx} className={styles.imageItem}>
-                                    <Image src={image.data_url} alt="" fill />
+                                    <Image
+                                        src={image.data_url}
+                                        alt=""
+                                        fill
+                                        style={{ objectFit: 'cover' }}
+                                    />
                                     <div className={styles.imageItemBtnWrapper}>
                                         <button onClick={() => onImageRemove(idx)}>
                                             <TbTrash />

@@ -1,0 +1,56 @@
+.info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info1_1 {
+    width: 45%;
+}
+
+.labels {
+    display: flex;
+    justify-content: space-between;
+}
+
+.activeLabel {
+    width: 40%;
+}
+
+.timeStampLabel {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+/* .fromLabel {
+    width: 20%;
+} */
+
+.toLabel {
+    margin-right: 20px;
+}
+
+.workingHours {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.when label {
+    margin-left: 10px;
+    width: 40%;
+}
+
+.timeStamp {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.timeStamp select:last-child {
+    margin-right: initial;
+}
+
+.info1_2 {
+    width: 45%;
+}

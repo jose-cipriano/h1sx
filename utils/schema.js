@@ -92,8 +92,8 @@ export const listingSchema = [
         nationality: yup.string().required('Nationality is required'),
         i_speak: yup.string().required('This field is required'),
         orientation: yup.string().required('This field is required'),
-        i_meet: yup.array().min(1, 'required, select up to four (4) values'),
-        available_for: yup.array().min(1, 'required, select up to three (3) values'),
+        i_meet: yup.array().min(1, 'required, select up to four (4) values').required(),
+        available_for: yup.array().min(1, 'required, select up to three (3) values').required(),
         height: yup.number().integer().positive().min(140).max(250),
         weight: yup.number().integer().positive().min(40).max(200),
         cup_size: yup.string().required('This field is required'),
@@ -113,5 +113,35 @@ export const listingSchema = [
         'thumbnails[0]': yup.mixed().nullable(),
         'thumbnails[1]': yup.mixed().nullable(),
         'thumbnails[2]': yup.mixed().nullable(),
+    }),
+    yup.object({
+        services: yup.array().of(
+            yup.object({
+                type: yup.string(),
+                price: yup.number(),
+            }),
+        ),
+    }),
+    yup.object({
+        availbility: yup.object({
+            workingHours: yup.array().of(
+                yup.object({
+                    when: yup.string(),
+                    active: yup.boolean(),
+                    from: yup.string(),
+                    to: yup.string(),
+                }),
+            ),
+            call: yup.object({
+                title: yup.string(),
+                availability: yup.boolean(),
+                rate: yup.array().of(
+                    yup.object({
+                        duration: yup.string(),
+                        price: yup.number(),
+                    }),
+                ),
+            }),
+        }),
     }),
 ]
