@@ -14,5 +14,6 @@ export const API_ENDPOINTS = {
     ACCOUNT: 'api/accounts',
     BASICDETAILS: 'api/listing/basic_details',
     CHARACTERISTICS: 'api/listing/characteristics',
-    MEDIAGALLERY: 'api/listing/mediagallery',
+    MEDIAGALLERY: 'api/listing/media_gallery',
+    SERVICES: 'api/listing/services',
 }

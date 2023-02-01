@@ -99,6 +99,7 @@ export default function Accounts() {
                                         error={touched.role && errors?.role}
                                         onChange={handleChange}
                                         options={roles}
+                                        values={values}
                                         required
                                     />
                                 </div>
@@ -165,6 +166,7 @@ export default function Accounts() {
                                         error={touched.accountStatus && errors?.accountStatus}
                                         onChange={handleChange}
                                         options={accountStates}
+                                        values={values}
                                         required
                                     />
                                     <DatePicker

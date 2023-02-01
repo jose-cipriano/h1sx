@@ -4,14 +4,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import Image from 'next/image'
 
-const MediaGalleryForm = ({ values, setFieldValue, errors, handleBlur }) => {
-    const restrictions = [
-        'max. file size is 20mb',
-        'supported files are jpeg, png, webp',
-        'portrait oriented recommended (2:3 ratio)',
-        'new uploads/modifications will be approaved manually - this can take up to 12h',
-        'restrictions: genitals (vagina, penis)',
-    ]
+const MediaGalleryForm = ({ values, setFieldValue }) => {
     const [imgGallery, setImgGallery] = useState('')
     const [thumbnails, setThumbnails] = useState([])
     const onChangeImg = (imageList, addUpdateIndex) => {

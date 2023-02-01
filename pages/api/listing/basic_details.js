@@ -58,6 +58,8 @@ async function handler(req, res) {
                                 smoking: '',
                                 drinking: '',
                                 party_play: '',
+                                thumbnails: '',
+                                services: '',
                             })
                             res.status(200).json({
                                 success: true,

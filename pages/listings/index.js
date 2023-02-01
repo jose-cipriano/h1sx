@@ -9,6 +9,8 @@ import { AnnouncementProvider } from '../../contexts/announcement'
 import BasicDetailsForm from './basicDetails'
 import CharacteristicsForm from './characteristics'
 import MediaGalleryForm from './mediaGallery'
+import ServicesForm from './services'
+import AvailabilityForm from './availability'
 import SubmitField from './submitField'
 // styles
 import styles from '../../styles/Layout.module.css'
@@ -61,8 +63,6 @@ export default function Listings() {
                     locationCity,
                 }),
             })
-
-            toast(res.message)
             setStatus('resolve')
             return res
         } catch (err) {
@@ -118,8 +118,6 @@ export default function Listings() {
                     listingId,
                 }),
             })
-
-            toast(res.message)
             setStatus('resolve')
             return res
         } catch (err) {
@@ -128,9 +126,45 @@ export default function Listings() {
         }
     }
 
-    // const createMediaGallery = async ({
+    const createMediaGallery = async ({ listingPicture, thumbnails }) => {
+        setStatus('pending')
+        try {
+            const res = await fetchJson(API_ENDPOINTS.MEDIAGALLERY, {
+                method: 'POST',
+                headers: { 'Content-Type': 'multipart/form-data' },
+                body: JSON.stringify({
+                    listingPicture,
+                    thumbnails,
+                    listingId,
+                }),
+            })
+            setStatus('resolve')
+            return res
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        }
+    }
 
-    // })
+    const createServices = async (services) => {
+        setStatus('pending')
+        console.log('services', services)
+        try {
+            const res = await fetchJson(API_ENDPOINTS.SERVICES, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    services,
+                    listingId,
+                }),
+            })
+            setStatus('resolve')
+            return res
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        }
+    }
 
     const handleNextForm = async (values) => {
         switch (activeStep) {
@@ -157,6 +191,32 @@ export default function Listings() {
                         setActiveStep(2)
                     } else {
                         console.log('failed step 2')
+                    }
+                } catch (err) {
+                    console.log('err', err)
+                }
+                break
+            case 2:
+                try {
+                    const res = await createMediaGallery(values, listingId)
+                    if (res.success) {
+                        toast(res.message)
+                        setActiveStep(3)
+                    } else {
+                        console.log('failed step 3')
+                    }
+                } catch (err) {
+                    console.log('err', err)
+                }
+                break
+            case 3:
+                try {
+                    const res = await createServices(values.services, listingId)
+                    if (res.success) {
+                        toast(res.message)
+                        setActiveStep(4)
+                    } else {
+                        console.log('failed step 4')
                     }
                 } catch (err) {
                     console.log('err', err)
@@ -205,6 +265,22 @@ export default function Listings() {
                         values={values}
                     />
                 )
+            case 3:
+                return (
+                    <ServicesForm
+                        touched={touched}
+                        errors={errors}
+                        setValues={(values) => setFieldValue('services', values)}
+                        values={values.services}
+                    />
+                )
+            case 4:
+                return (
+                    <AvailabilityForm
+                        setValues={(values) => setFieldValue('availability', values)}
+                        values={values.availability}
+                    />
+                )
             default:
                 return null
         }
@@ -250,24 +326,54 @@ export default function Listings() {
                             locationCountry: 'Cyprus',
                             locationCity: 'Limassol',
                             thumbnails: null,
-                            // nationality: '',
-                            // i_speak: '',
-                            // orientation: '',
-                            // i_meet: 'Males',
-                            // available_for: 'Incall',
-                            // height: 140,
-                            // weight: 40,
-                            // cup_size: '',
-                            // b_type: '',
-                            // p_length: 11,
-                            // p_girth: 8,
-                            // hair_color: '',
-                            // eye_color: '',
-                            // intimate_hair: '',
-                            // body_art: 'Piercing',
-                            // smoking: '',
-                            // drinking: '',
-                            // party_play: ''
+                            nationality: 'Hungarian',
+                            i_speak: 'English',
+                            height: 170,
+                            weight: 55,
+                            p_length: 20,
+                            p_girth: 14,
+                            services: [
+                                { title: '69', type: null, price: 15 },
+                                { title: 'Anal Sex', type: null, price: 15 },
+                                { title: 'Body Cumshot', type: null, price: 15 },
+                                { title: 'Classic Massage', type: null, price: 15 },
+                                { title: 'Erotic Massage', type: null, price: 15 },
+                                { title: 'Nuru Massage', type: null, price: 15 },
+                                { title: 'BDSM', type: null, price: 15 },
+                                { title: 'Bondage', type: null, price: 15 },
+                                { title: 'Dominance', type: null, price: 15 },
+                                { title: 'Companion for Lunch', type: null, price: 15 },
+                                { title: 'Companion for Vacations', type: null, price: 15 },
+                                { title: 'Overnight (12h)', type: null, price: 15 },
+                            ],
+                            availability: {
+                                workingHours: [
+                                    { when: 'Monday', active: false, from: '17:00', to: '21:30' },
+                                    { when: 'Tuesday', active: false, from: '17:00', to: '21:30' },
+                                    {
+                                        when: 'Wednesday',
+                                        active: false,
+                                        from: '17:00',
+                                        to: '21:30',
+                                    },
+                                    { when: 'Thursday', active: false, from: '17:00', to: '21:30' },
+                                    { when: 'Friday', active: false, from: '17:00', to: '21:30' },
+                                    { when: 'Saturday', active: false, from: '17:00', to: '21:30' },
+                                    { when: 'Sunday', active: false, from: '17:00', to: '21:30' },
+                                ],
+                                call: [
+                                    {
+                                        title: 'InCall',
+                                        availability: false,
+                                        rate: [{ duration: '20min', price: 50 }],
+                                    },
+                                    {
+                                        title: 'outCall',
+                                        availability: false,
+                                        rate: [{ duration: '20min', price: 50 }],
+                                    },
+                                ],
+                            },
                         }}
                         validationSchema={listingSchema[activeStep]}
                         onSubmit={handleNextForm}

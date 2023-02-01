@@ -116,6 +116,14 @@ const ListingSchema = new Schema({
         type: String,
         // required: true,
     },
+    thumbnails: [String],
+    services: [
+        {
+            title: String,
+            type: String,
+            price: Number,
+        },
+    ],
 })
 
 module.exports =

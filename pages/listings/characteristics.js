@@ -24,7 +24,7 @@ const CharacteristicsForm = ({ touched, errors, handleChange, values }) => {
     const drinkings = ['Yes', 'Occasionally', 'No']
     const parties = ['Yes', 'No']
 
-    console.log(values)
+    console.log(errors, values)
     return (
         <>
             <div className={characteristicsStyles.info_1}>
@@ -33,7 +33,8 @@ const CharacteristicsForm = ({ touched, errors, handleChange, values }) => {
                     label="Nationality"
                     name="nationality"
                     options={nationalities}
-                    error={errors.nationality}
+                    defaultValue="Hungarian"
+                    error={errors?.nationality}
                     values={values}
                 />
                 <Select
@@ -41,7 +42,8 @@ const CharacteristicsForm = ({ touched, errors, handleChange, values }) => {
                     label="I Speak"
                     name="i_speak"
                     options={languages}
-                    error={errors.i_speak}
+                    defaultValue="English"
+                    error={errors?.i_speak}
                     values={values}
                 />
                 <SingleSelect
@@ -76,6 +78,7 @@ const CharacteristicsForm = ({ touched, errors, handleChange, values }) => {
                     label="Height (cm)"
                     name="height"
                     error={errors.height}
+                    defaultValue={170}
                     options={heights}
                     values={values}
                 />
@@ -84,6 +87,7 @@ const CharacteristicsForm = ({ touched, errors, handleChange, values }) => {
                     label="Weight"
                     name="weight"
                     error={errors.weight}
+                    defaultValue={55}
                     options={weights}
                     values={values}
                 />
@@ -110,6 +114,7 @@ const CharacteristicsForm = ({ touched, errors, handleChange, values }) => {
                     label="Penis Length (cm)"
                     name="p_length"
                     error={errors.p_length}
+                    defaultValue={20}
                     options={pLengths}
                     values={values}
                 />
@@ -118,6 +123,7 @@ const CharacteristicsForm = ({ touched, errors, handleChange, values }) => {
                     label="Penis Girth (cm)"
                     name="p_girth"
                     error={errors.p_girth}
+                    defaultValue={14}
                     options={pGirths}
                     values={values}
                 />
