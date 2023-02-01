@@ -87,7 +87,7 @@ async function handler(req, res) {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: 'Internal ServerError',
+            message: "Can't connect the server",
             data: error.message,
         })
         return

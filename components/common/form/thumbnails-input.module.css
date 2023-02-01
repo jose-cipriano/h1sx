@@ -102,10 +102,6 @@
     height: 102.5%;
 }
 
-.imageItem img {
-    object-fit: fill;
-}
-
 .imageCover {
     margin-left: 25px;
     bottom: 20px;

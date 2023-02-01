@@ -89,37 +89,29 @@ export const listingSchema = [
             .required('A listing picture is required.'),
     }),
     yup.object({
-        nationality: yup.string('Enter the Nationality').required('Nationality is required'),
-        i_speak: yup.string('Enter the language').required('This field is required'),
-        orientation: yup.string('Enter the Orientation').required('This field is required'),
+        nationality: yup.string().required('Nationality is required'),
+        i_speak: yup.string().required('This field is required'),
+        orientation: yup.string().required('This field is required'),
         i_meet: yup.array().min(1, 'required, select up to four (4) values'),
         available_for: yup.array().min(1, 'required, select up to three (3) values'),
         height: yup.number().integer().positive().min(140).max(250),
         weight: yup.number().integer().positive().min(40).max(200),
-        cup_size: yup.string('Enter this field').required('This field is required'),
-        breast_type: yup.string('Enter this field').required('This field is required'),
-        penis_length: yup.string('Enter this field').required('This field is required'),
-        penis_girth: yup.string('Enter this field').required('This field is required'),
-        hair_color: yup.string('Enter this field').required('This field is required'),
-        eye_color: yup.string('Enter this field').required('This field is required'),
-        intimate_hair: yup.string('Enter this field').required('This field is required'),
+        cup_size: yup.string().required('This field is required'),
+        b_type: yup.string().required('This field is required'),
+        p_length: yup.number().integer().positive().min(11).max(28),
+        p_girth: yup.number().integer().positive().min(8).max(20),
+        hair_color: yup.string().required('This field is required'),
+        eye_color: yup.string().required('This field is required'),
+        intimate_hair: yup.string().required('This field is required'),
         bodyart: yup.array().max(2, 'select up to two (2) values'),
-        smoking: yup.string('Enter this field').required('This field is required'),
-        drinking: yup.string('Enter this field').required('This field is required'),
-        party_play: yup.string('Enter this field').required('This field is required'),
+        smoking: yup.string().required('This field is required'),
+        drinking: yup.string().required('This field is required'),
+        party_play: yup.string().required('This field is required'),
     }),
     yup.object({
-        uploadForMediaGallery: yup
-            .object()
-            .shape({
-                file: yup
-                    .mixed()
-                    .test('fileSize', 'File Size is too large', (value) => value.size <= FILE_SIZE)
-                    .test('fileType', 'Unsupported File Format', (value) =>
-                        SUPPORTED_FORMATS.includes(value.type),
-                    )
-                    .required('A file is required.'),
-            })
-            .nullable(),
+        thumbnails: yup.array(),
+        'thumbnails[0]': yup.mixed().nullable(),
+        'thumbnails[1]': yup.mixed().nullable(),
+        'thumbnails[2]': yup.mixed().nullable(),
     }),
 ]

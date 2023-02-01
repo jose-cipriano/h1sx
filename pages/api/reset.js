@@ -23,7 +23,11 @@ async function handler(req, res) {
 
         res.status(200).json({ success: true, message: 'Password has Successfully Updated' })
     } catch (error) {
-        res.status(500).json({ success: false, message: error.message })
+        res.status(500).json({
+            success: false,
+            message: "Can't connect the server",
+            data: error.message,
+        })
     }
 }
 

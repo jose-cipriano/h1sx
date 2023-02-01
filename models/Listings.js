@@ -36,7 +36,10 @@ const ListingSchema = new Schema({
         type: String,
         // required: true,
     },
-    contactMethods: [String],
+    contactMethods: {
+        type: [String],
+        required: true,
+    },
     listingPicture: {
         type: String,
         required: true,
@@ -54,35 +57,35 @@ const ListingSchema = new Schema({
         // required: true,
     },
     i_meet: {
-        type: String,
+        type: [String],
         // required: true,
     },
     available_for: {
-        type: String,
+        type: [String],
         // required: true,
     },
     height: {
-        type: String,
+        type: Number,
         // required: true,
     },
     weight: {
-        type: String,
+        type: Number,
         // required: true,
     },
     cup_size: {
         type: String,
         // required: true,
     },
-    breast_type: {
+    b_type: {
         type: String,
         // required: true,
     },
-    penis_length: {
-        type: String,
+    p_length: {
+        type: Number,
         // required: true,
     },
-    penis_girth: {
-        type: String,
+    p_girth: {
+        type: Number,
         // required: true,
     },
     hair_color: {
@@ -98,7 +101,7 @@ const ListingSchema = new Schema({
         // required: true,
     },
     bodyart: {
-        type: String,
+        type: [String],
         // required: true,
     },
     smoking: {
