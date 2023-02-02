@@ -4,7 +4,7 @@ import styles from './radio-select.module.css'
 
 const radioOptions = ['included', 'extra']
 const priceOptions = [15, 30, 50, 75, 100, 125, 150]
-const RadioSelect = ({ id, value, setValue, touched, idx }) => {
+const RadioSelect = ({ id, value, setValue, touched, idx, handleBlur }) => {
     return (
         <div className={styles.container}>
             <div className={styles.optionsContent} id={id}>
@@ -19,6 +19,8 @@ const RadioSelect = ({ id, value, setValue, touched, idx }) => {
                                     </label>
                                 )}
                                 <Field
+                                    id={item}
+                                    name={item}
                                     touched={touched}
                                     type="radio"
                                     className={styles.optionInput}
@@ -35,6 +37,8 @@ const RadioSelect = ({ id, value, setValue, touched, idx }) => {
                         )}
                         {value.serviceType === 'extra' && (
                             <Field
+                                id={item}
+                                name={item}
                                 as="select"
                                 className={styles.priceInput}
                                 value={value.price}

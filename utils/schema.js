@@ -135,12 +135,10 @@ export const listingSchema = [
             call: yup.object({
                 title: yup.string(),
                 availability: yup.boolean(),
-                rate: yup.array().of(
-                    yup.object({
-                        duration: yup.string(),
-                        price: yup.number(),
-                    }),
-                ),
+                rate: yup.object({
+                    duration: yup.string(),
+                    price: yup.number(),
+                }),
             }),
         }),
     }),

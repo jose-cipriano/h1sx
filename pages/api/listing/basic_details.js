@@ -60,6 +60,7 @@ async function handler(req, res) {
                                 party_play: '',
                                 thumbnails: '',
                                 services: {},
+                                availability: {},
                             })
                             res.status(200).json({
                                 success: true,

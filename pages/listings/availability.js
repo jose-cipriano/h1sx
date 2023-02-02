@@ -49,7 +49,6 @@ const AvailabilityForm = ({ setValues, values, errors }) => {
     }
 
     const handleToggle = (value, idx) => {
-        console.log(value, idx)
         const origin = values.call[idx]
         values.call[idx] = {
             ...origin,
@@ -58,7 +57,6 @@ const AvailabilityForm = ({ setValues, values, errors }) => {
         setValues(values)
     }
 
-    console.log(errors, values)
     return (
         <>
             <div className={availabilityStyle.info}>
@@ -75,6 +73,8 @@ const AvailabilityForm = ({ setValues, values, errors }) => {
                             <div key={idx} className={availabilityStyle.workingHours}>
                                 <div className={availabilityStyle.when}>
                                     <Field
+                                        id={item.when}
+                                        name={item.when}
                                         type="checkbox"
                                         className={availabilityStyle.checkboxInput}
                                         checked={item.active}
@@ -88,6 +88,8 @@ const AvailabilityForm = ({ setValues, values, errors }) => {
                                 <div className={availabilityStyle.timeStamp}>
                                     {item.active && (
                                         <Field
+                                            id={`${item.when}_from`}
+                                            name={`${item.when}_from`}
                                             as="select"
                                             className={availabilityStyle.fromInput}
                                             value={item.from}
@@ -104,6 +106,8 @@ const AvailabilityForm = ({ setValues, values, errors }) => {
                                     )}
                                     {item.active && (
                                         <Field
+                                            id={`${item.when}_to`}
+                                            name={`${item.when}_to`}
                                             as="select"
                                             className={availabilityStyle.fromInput}
                                             value={item.to}

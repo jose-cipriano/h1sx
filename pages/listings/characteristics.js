@@ -24,7 +24,6 @@ const CharacteristicsForm = ({ touched, errors, handleChange, values }) => {
     const drinkings = ['Yes', 'Occasionally', 'No']
     const parties = ['Yes', 'No']
 
-    console.log(errors, values)
     return (
         <>
             <div className={characteristicsStyles.info_1}>

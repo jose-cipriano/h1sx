@@ -130,6 +130,42 @@ const ListingSchema = new Schema({
             },
         },
     ],
+    availability: {
+        workingHours: [
+            {
+                when: {
+                    type: String,
+                },
+                active: {
+                    type: Boolean,
+                },
+                from: {
+                    type: String,
+                },
+                to: {
+                    type: String,
+                },
+            },
+        ],
+        call: [
+            {
+                title: {
+                    type: String,
+                },
+                availability: {
+                    type: Boolean,
+                },
+                rate: {
+                    duration: {
+                        type: String,
+                    },
+                    price: {
+                        type: Number,
+                    },
+                },
+            },
+        ],
+    },
 })
 
 module.exports =

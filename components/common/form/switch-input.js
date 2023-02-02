@@ -6,22 +6,20 @@ import { ToggleSwitch } from './toggle-switch'
 const timeStamps = ['20min', '1h', '2h']
 const priceOptions = [15, 25, 50, 100, 125, 150]
 const SwitchInput = ({ id, label, name, error, options, item, toggle, idx, ...props }) => {
-    const onChangeDurationTime = (value, id) => {
-        console.log(value, id)
-        const origin = item.rate[id]
-        item.rate[id] = {
+    const onChangeDurationTime = (value) => {
+        const origin = item.rate
+        item.rate = {
             ...origin,
             duration: value,
         }
         // setValues(...item)
     }
 
-    const onChangePriceForTime = (value, id) => {
-        console.log(value, id)
-        const origin = item.rate[id]
-        item.rate[id] = {
+    const onChangePriceForTime = (value) => {
+        const origin = item.rate
+        item.rate = {
             ...origin,
-            price: value,
+            price: Number(value),
         }
         // setValues(...item)
     }
@@ -44,51 +42,98 @@ const SwitchInput = ({ id, label, name, error, options, item, toggle, idx, ...pr
                     style={!item.availability ? { color: 'var(--color-grey)' } : {}}
                 >
                     <span>Available</span>
-                    <ToggleSwitch on={item.availability} onClick={(e) => toggle(e, idx)} />
+                    <ToggleSwitch
+                        id={id}
+                        name={name}
+                        on={item.availability}
+                        onClick={(e) => toggle(e, idx)}
+                    />
                 </div>
             </fieldset>
-            {item.availability &&
-                item.rate.map((rateItem, ind) => {
-                    return (
-                        <div className={styles.availabilityPrice} key={ind}>
-                            <div className={styles.availabilityPriceDuration}>
-                                <label>Duration</label>
-                                <Field
-                                    as="select"
-                                    className={styles.fromInput}
-                                    value={rateItem.duration}
-                                    onChange={(e) => onChangeDurationTime(e.target.value, ind)}
-                                >
-                                    {timeStamps.map((opt) => {
-                                        return (
-                                            <option key={opt} value={opt}>
-                                                {opt}
-                                            </option>
-                                        )
-                                    })}
-                                </Field>
-                            </div>
-                            <div className={styles.availabilityPriceSelect}>
-                                <label>Price</label>
-                                <Field
-                                    as="select"
-                                    className={styles.fromInput}
-                                    value={rateItem.price}
-                                    onChange={(e) => onChangePriceForTime(e.target.value, ind)}
-                                >
-                                    {priceOptions.map((opt) => {
-                                        return (
-                                            <option key={opt} value={opt}>
-                                                {opt}
-                                            </option>
-                                        )
-                                    })}
-                                </Field>
-                            </div>
-                        </div>
-                    )
-                })}
+            {item.availability && (
+                <div className={styles.availabilityPrice}>
+                    <div className={styles.availabilityPriceDuration}>
+                        <label>Duration</label>
+                        <Field
+                            id={id}
+                            name={name}
+                            as="select"
+                            className={styles.fromInput}
+                            value={item.duration}
+                            onChange={(e) => onChangeDurationTime(e.target.value)}
+                        >
+                            {timeStamps.map((opt) => {
+                                return (
+                                    <option key={opt} value={opt}>
+                                        {opt}
+                                    </option>
+                                )
+                            })}
+                        </Field>
+                    </div>
+                    <div className={styles.availabilityPriceSelect}>
+                        <label>Price</label>
+                        <Field
+                            id={id}
+                            name={name}
+                            as="select"
+                            className={styles.fromInput}
+                            value={item.price}
+                            onChange={(e) => onChangePriceForTime(e.target.value)}
+                        >
+                            {priceOptions.map((opt) => {
+                                return (
+                                    <option key={opt} value={opt}>
+                                        {opt}
+                                    </option>
+                                )
+                            })}
+                        </Field>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
 export default SwitchInput
+// {item.availability &&
+//     item.rate.map((rateItem, ind) => {
+//         return (
+//             <div className={styles.availabilityPrice} key={ind}>
+//                 <div className={styles.availabilityPriceDuration}>
+//                     <label>Duration</label>
+//                     <Field
+//                         as="select"
+//                         className={styles.fromInput}
+//                         value={rateItem.duration}
+//                         onChange={(e) => onChangeDurationTime(e.target.value, ind)}
+//                     >
+//                         {timeStamps.map((opt) => {
+//                             return (
+//                                 <option key={opt} value={opt}>
+//                                     {opt}
+//                                 </option>
+//                             )
+//                         })}
+//                     </Field>
+//                 </div>
+//                 <div className={styles.availabilityPriceSelect}>
+//                     <label>Price</label>
+//                     <Field
+//                         as="select"
+//                         className={styles.fromInput}
+//                         value={rateItem.price}
+//                         onChange={(e) => onChangePriceForTime(e.target.value, ind)}
+//                     >
+//                         {priceOptions.map((opt) => {
+//                             return (
+//                                 <option key={opt} value={opt}>
+//                                     {opt}
+//                                 </option>
+//                             )
+//                         })}
+//                     </Field>
+//                 </div>
+//             </div>
+//         )
+//     })}

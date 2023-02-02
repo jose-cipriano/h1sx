@@ -33,7 +33,6 @@ export default function Listings() {
     const [activeStep, setActiveStep] = useState(0)
     const [listingId, setListingId] = useState('')
     const isLastStep = activeStep === steps.length - 1
-    const isFirstStep = activeStep === 0
 
     const createListingBasicDetails = async ({
         listingName,
@@ -165,6 +164,25 @@ export default function Listings() {
         }
     }
 
+    const createAvailability = async (availability) => {
+        setStatus('pending')
+        try {
+            const res = await fetchJson(API_ENDPOINTS.AVAILABILITY, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    availability,
+                    listingId,
+                }),
+            })
+            setStatus('resolve')
+            return res
+        } catch (err) {
+            console.log(err)
+            toast(err.message)
+        }
+    }
+
     const handleNextForm = async (values) => {
         switch (activeStep) {
             case 0:
@@ -222,6 +240,20 @@ export default function Listings() {
                 } catch (err) {
                     console.log('err', err)
                 }
+                break
+            case 4:
+                try {
+                    const res = await createAvailability(values.availability, listingId)
+                    if (res.success) {
+                        toast(res.message)
+                        setActiveStep(0)
+                    } else {
+                        console.log('failed step 5')
+                    }
+                } catch (err) {
+                    console.log('err', err)
+                }
+                break
             default:
                 break
         }
@@ -359,12 +391,12 @@ export default function Listings() {
                                     {
                                         title: 'InCall',
                                         availability: false,
-                                        rate: [{ duration: '20min', price: 50 }],
+                                        rate: { duration: '20min', price: 50 },
                                     },
                                     {
                                         title: 'outCall',
                                         availability: false,
-                                        rate: [{ duration: '20min', price: 50 }],
+                                        rate: { duration: '20min', price: 50 },
                                     },
                                 ],
                             },
