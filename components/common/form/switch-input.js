@@ -31,7 +31,6 @@ const SwitchInput = ({ id, label, name, error, options, item, toggle, idx, ...pr
                 <legend
                     style={{
                         marginLeft: '4px',
-                        color: 'var(--color-grey)',
                         fontSize: '0.96rem',
                         textTransform: 'initial',
                         fontWeight: 'initial',
@@ -40,8 +39,11 @@ const SwitchInput = ({ id, label, name, error, options, item, toggle, idx, ...pr
                 >
                     {label}
                 </legend>
-                <div className={styles.inputHolder}>
-                    <span>{name}</span>
+                <div
+                    className={styles.inputHolder}
+                    style={!item.availability ? { color: 'var(--color-grey)' } : {}}
+                >
+                    <span>Available</span>
                     <ToggleSwitch on={item.availability} onClick={(e) => toggle(e, idx)} />
                 </div>
             </fieldset>

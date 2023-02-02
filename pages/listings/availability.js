@@ -20,7 +20,7 @@ const timeOptions = [
     '24:00',
 ]
 
-const AvailabilityForm = ({ setValues, values }) => {
+const AvailabilityForm = ({ setValues, values, errors }) => {
     const onChangeActive = (checked, idx) => {
         const origin = values.workingHours[idx]
         values.workingHours[idx] = {
@@ -58,6 +58,7 @@ const AvailabilityForm = ({ setValues, values }) => {
         setValues(values)
     }
 
+    console.log(errors, values)
     return (
         <>
             <div className={availabilityStyle.info}>

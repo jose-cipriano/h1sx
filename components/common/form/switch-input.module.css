@@ -1,6 +1,7 @@
 .container {
     position: relative;
     margin: 0.5rem auto 2rem;
+    width: 47%;
 }
 
 .fieldset {
@@ -27,7 +28,6 @@
     border: none;
 }
 
-
 .error {
     margin: 0;
     padding: 0.1rem 0 0 0.8rem;
@@ -47,11 +47,11 @@
     cursor: pointer;
 }
 
-.select:valid ~ label {
+.select:valid~label {
     transform: translate(0, -1rem) scale(0.8);
 }
 
-.select:focus ~ label {
+.select:focus~label {
     transform: translate(0, -1rem) scale(0.8);
     color: var(--color-green);
 }
@@ -123,6 +123,7 @@
 .availabilityPrice select {
     height: 30px;
     border-radius: 5px;
+    text-align: center;
 }
 
 .availabilityPriceDuration {
@@ -132,7 +133,7 @@
 }
 
 .availabilityPriceDuration label {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--color-grey);
     width: 150%;
     padding: 10px;
     margin-bottom: 10px;
@@ -145,7 +146,7 @@
 }
 
 .availabilityPriceSelect label {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--color-grey);
     width: 100%;
     margin-bottom: 10px;
     padding: 10px;

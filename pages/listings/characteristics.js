@@ -91,42 +91,50 @@ const CharacteristicsForm = ({ touched, errors, handleChange, values }) => {
                     options={weights}
                     values={values}
                 />
-                <SingleSelect
-                    id="cup_size"
-                    label="Cup Size"
-                    name="cup_size"
-                    error={errors.cup_size}
-                    options={cupSizes}
-                    values={values}
-                    touched={touched}
-                />
-                <SingleSelect
-                    id="b_type"
-                    label="Breast Type"
-                    name="b_type"
-                    error={errors.b_type}
-                    options={bTypes}
-                    values={values}
-                    touched={touched}
-                />
-                <Select
-                    id="p_length"
-                    label="Penis Length (cm)"
-                    name="p_length"
-                    error={errors.p_length}
-                    defaultValue={20}
-                    options={pLengths}
-                    values={values}
-                />
-                <Select
-                    id="p_girth"
-                    label="Penis Girth (cm)"
-                    name="p_girth"
-                    error={errors.p_girth}
-                    defaultValue={14}
-                    options={pGirths}
-                    values={values}
-                />
+                {values.gender !== 'Male' && (
+                    <>
+                        <SingleSelect
+                            id="cup_size"
+                            label="Cup Size"
+                            name="cup_size"
+                            error={errors.cup_size}
+                            options={cupSizes}
+                            values={values}
+                            touched={touched}
+                        />
+                        <SingleSelect
+                            id="b_type"
+                            label="Breast Type"
+                            name="b_type"
+                            error={errors.b_type}
+                            options={bTypes}
+                            values={values}
+                            touched={touched}
+                        />
+                    </>
+                )}
+                {values.gender !== 'Female' && (
+                    <>
+                        <Select
+                            id="p_length"
+                            label="Penis Length (cm)"
+                            name="p_length"
+                            error={errors.p_length}
+                            defaultValue={20}
+                            options={pLengths}
+                            values={values}
+                        />
+                        <Select
+                            id="p_girth"
+                            label="Penis Girth (cm)"
+                            name="p_girth"
+                            error={errors.p_girth}
+                            defaultValue={14}
+                            options={pGirths}
+                            values={values}
+                        />
+                    </>
+                )}
             </div>
             <div className={characteristicsStyles.info_3}>
                 <SingleSelect

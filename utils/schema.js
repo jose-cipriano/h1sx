@@ -96,8 +96,8 @@ export const listingSchema = [
         available_for: yup.array().min(1, 'required, select up to three (3) values').required(),
         height: yup.number().integer().positive().min(140).max(250),
         weight: yup.number().integer().positive().min(40).max(200),
-        cup_size: yup.string().required('This field is required'),
-        b_type: yup.string().required('This field is required'),
+        cup_size: yup.string(),
+        b_type: yup.string(),
         p_length: yup.number().integer().positive().min(11).max(28),
         p_girth: yup.number().integer().positive().min(8).max(20),
         hair_color: yup.string().required('This field is required'),
@@ -109,16 +109,16 @@ export const listingSchema = [
         party_play: yup.string().required('This field is required'),
     }),
     yup.object({
-        thumbnails: yup.array(),
-        'thumbnails[0]': yup.mixed().nullable(),
-        'thumbnails[1]': yup.mixed().nullable(),
-        'thumbnails[2]': yup.mixed().nullable(),
+        thumbnails: yup.array().nullable(),
+        'thumbnails[0]': yup.mixed(),
+        'thumbnails[1]': yup.mixed(),
+        'thumbnails[2]': yup.mixed(),
     }),
     yup.object({
         services: yup.array().of(
             yup.object({
-                type: yup.string(),
-                price: yup.number(),
+                serviceType: yup.string().nullable(),
+                price: yup.number().nullable(),
             }),
         ),
     }),
