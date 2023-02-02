@@ -119,9 +119,15 @@ const ListingSchema = new Schema({
     thumbnails: [String],
     services: [
         {
-            title: String,
-            type: String,
-            price: Number,
+            title: {
+                type: String,
+            },
+            serviceType: {
+                type: String,
+            },
+            price: {
+                type: String,
+            },
         },
     ],
 })

@@ -22,9 +22,9 @@ const RadioSelect = ({ id, value, setValue, touched, idx }) => {
                                     touched={touched}
                                     type="radio"
                                     className={styles.optionInput}
-                                    checked={item === value.type}
+                                    checked={item === value.serviceType}
                                     value={item}
-                                    onChange={() => setValue({ ...value, type: item })}
+                                    onChange={() => setValue({ ...value, serviceType: item })}
                                 />
                             </div>
                         )
@@ -33,7 +33,7 @@ const RadioSelect = ({ id, value, setValue, touched, idx }) => {
                         {(idx === 0 || idx === 1) && (
                             <label style={{ top: '-20px', left: 0 }}>price</label>
                         )}
-                        {value.type === 'extra' && (
+                        {value.serviceType === 'extra' && (
                             <Field
                                 as="select"
                                 className={styles.priceInput}

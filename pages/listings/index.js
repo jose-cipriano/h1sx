@@ -148,7 +148,6 @@ export default function Listings() {
 
     const createServices = async (services) => {
         setStatus('pending')
-        console.log('services', services)
         try {
             const res = await fetchJson(API_ENDPOINTS.SERVICES, {
                 method: 'POST',
@@ -200,7 +199,9 @@ export default function Listings() {
                 try {
                     const res = await createMediaGallery(values, listingId)
                     if (res.success) {
-                        toast(res.message)
+                        if (res.message) {
+                            toast(res.message)
+                        }
                         setActiveStep(3)
                     } else {
                         console.log('failed step 3')
@@ -279,19 +280,11 @@ export default function Listings() {
                     <AvailabilityForm
                         setValues={(values) => setFieldValue('availability', values)}
                         values={values.availability}
+                        errors={errors}
                     />
                 )
             default:
                 return null
-        }
-    }
-
-    function _renderClassName(step) {
-        switch (step) {
-            case 0:
-                return listingStyles.flexForm
-            default:
-                return listingStyles.flexForm
         }
     }
 
@@ -332,19 +325,20 @@ export default function Listings() {
                             weight: 55,
                             p_length: 20,
                             p_girth: 14,
+                            cupsize: '',
                             services: [
-                                { title: '69', type: null, price: 15 },
-                                { title: 'Anal Sex', type: null, price: 15 },
-                                { title: 'Body Cumshot', type: null, price: 15 },
-                                { title: 'Classic Massage', type: null, price: 15 },
-                                { title: 'Erotic Massage', type: null, price: 15 },
-                                { title: 'Nuru Massage', type: null, price: 15 },
-                                { title: 'BDSM', type: null, price: 15 },
-                                { title: 'Bondage', type: null, price: 15 },
-                                { title: 'Dominance', type: null, price: 15 },
-                                { title: 'Companion for Lunch', type: null, price: 15 },
-                                { title: 'Companion for Vacations', type: null, price: 15 },
-                                { title: 'Overnight (12h)', type: null, price: 15 },
+                                { title: '69', serviceType: null, price: 15 },
+                                { title: 'Anal Sex', serviceType: null, price: 15 },
+                                { title: 'Body Cumshot', serviceType: null, price: 15 },
+                                { title: 'Classic Massage', serviceType: null, price: 15 },
+                                { title: 'Erotic Massage', serviceType: null, price: 15 },
+                                { title: 'Nuru Massage', serviceType: null, price: 15 },
+                                { title: 'BDSM', serviceType: null, price: 15 },
+                                { title: 'Bondage', serviceType: null, price: 15 },
+                                { title: 'Dominance', serviceType: null, price: 15 },
+                                { title: 'Companion for Lunch', serviceType: null, price: 15 },
+                                { title: 'Companion for Vacations', serviceType: null, price: 15 },
+                                { title: 'Overnight (12h)', serviceType: null, price: 15 },
                             ],
                             availability: {
                                 workingHours: [
@@ -380,7 +374,7 @@ export default function Listings() {
                     >
                         {({ touched, errors, handleBlur, handleChange, setFieldValue, values }) => {
                             return (
-                                <Form className={_renderClassName(activeStep)}>
+                                <Form className={listingStyles.flexForm}>
                                     {_renderStepContent({
                                         step: activeStep,
                                         touched,
@@ -390,7 +384,7 @@ export default function Listings() {
                                         setFieldValue,
                                         values,
                                     })}
-                                    <SubmitField disabled={!isLastStep} />
+                                    <SubmitField status={status} disabled={!isLastStep} />
                                 </Form>
                             )
                         }}

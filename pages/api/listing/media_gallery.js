@@ -9,6 +9,14 @@ async function handler(req, res) {
         switch (method) {
             case 'POST':
                 const { listingPicture, thumbnails, listingId } = JSON.parse(req.body)
+                if (!thumbnails) {
+                    res.status(200).json({
+                        success: true,
+                        message: '',
+                        data: listingId,
+                    })
+                    return
+                }
                 let titles = thumbnails.map((item) => item.data_url)
 
                 try {

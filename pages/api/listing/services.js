@@ -9,12 +9,12 @@ async function handler(req, res) {
         switch (method) {
             case 'POST':
                 const { services, listingId } = req.body
-                console.log(services, listingId)
+
                 try {
                     const savedListing = await Listing.updateOne(
                         { _id: ObjectId(listingId) },
                         {
-                            services: [], //TODO change
+                            services: services,
                         },
                     )
 
