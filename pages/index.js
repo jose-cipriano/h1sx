@@ -38,8 +38,6 @@ export default function Home() {
                 }
                 toast(res.message)
                 setUsernameErr(res.message)
-            } else {
-                window.location.reload()
             }
             mutateUser()
         } catch (err) {

@@ -22,7 +22,7 @@ const Header = () => {
                 }),
                 false,
             )
-            router.push('/')
+            await router.push('/')
             window.location.reload()
         } catch (e) {
             console.log(e)
